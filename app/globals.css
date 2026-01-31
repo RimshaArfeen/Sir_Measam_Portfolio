@@ -1,26 +1,657 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   GLOBAL FOUNDATION — Dark Luxury Design System
+   Tailwind v4 @theme — CEO-grade, cinematic, calm
+   ========================================================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --------------------------------------------------------------------------
+     COLOR — Intentional, minimal. Near-black base, soft off-white, muted accent.
+     -------------------------------------------------------------------------- */
+  --color-bg: #0c0c0d;
+  --color-bg-elevated: #141416;
+  --color-bg-overlay: #1a1a1d;
+  --color-surface: #18181b;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-text: #fafaf9;
+  --color-text-muted: #a1a1aa;
+  --color-text-subtle: #71717a;
+  --color-accent: #c9a962;
+  --color-accent-muted: rgba(201, 169, 98, 0.5);
+  --color-accent-cyan: #7dd3c0;
+  --color-accent-cyan-muted: rgba(125, 211, 192, 0.4);
+
+  /* Typography — Inter only (single font, whole site) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Font weights — hierarchy via weight and spacing, not color */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Type scale — consistent rhythm, calm, executive */
+  --text-hero: 4.5rem;
+  --text-hero-tracking: -0.04em;
+  --text-display: 3rem;
+  --text-display-tracking: -0.03em;
+  --text-h1: 2.25rem;
+  --text-h2: 1.75rem;
+  --text-h3: 1.375rem;
+  --text-body: 1rem;
+  --text-body-lg: 1.125rem;
+  --text-caption: 0.875rem;
+  --text-meta: 0.75rem;
+
+  /* Line heights — generous for body, tight for headlines */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Spacing scale — vertical rhythm, wide negative space */
+  --space-section: 6rem;
+  --space-section-sm: 4rem;
+  --space-block: 2rem;
+  --space-block-sm: 1.25rem;
+  --space-inline: 1rem;
+  --space-inline-sm: 0.5rem;
+  --space-gutter: 1.5rem;
+  --space-gutter-lg: 2rem;
+  --space-page-x: clamp(1.5rem, 5vw, 3rem);
+  --space-page-y: clamp(2rem, 6vh, 4rem);
+
+  /* Easing — for transitions and future GSAP/ScrollTrigger */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Z-index scale */
+  --z-base: 0;
+  --z-content: 1;
+  --z-header: 15;
+  --z-footer: 1;
+  --z-overlay: 10;
+  --z-noise: 20;
+  --z-transition: 30;
+  --z-modal: 40;
+
+  /* Header */
+  --header-height: 4.5rem;
+  --header-height-scrolled: 3.5rem;
+  --header-transition-duration: 0.35s;
+  --header-transition-ease: var(--ease-out-expo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+html {
+  scroll-behavior: auto; /* Lenis controls smooth scroll; fallback for reduced-motion */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.35s var(--ease-out-expo),
+    color 0.35s var(--ease-out-expo);
+}
+
+/* Light theme — works with ThemeProvider data-theme="light" */
+[data-theme="light"] {
+  --color-bg: #fafaf9;
+  --color-bg-elevated: #f4f4f5;
+  --color-bg-overlay: #e4e4e7;
+  --color-surface: #f4f4f5;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+  --color-text: #18181b;
+  --color-text-muted: #52525b;
+  --color-text-subtle: #71717a;
+  --color-accent: #a68b4a;
+  --color-accent-muted: rgba(166, 139, 74, 0.5);
+  --color-accent-cyan: #0d9488;
+  --color-accent-cyan-muted: rgba(13, 148, 136, 0.4);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY UTILITIES — Inter only, hierarchy via weight & spacing
+   ========================================================================== */
+
+/* 1. Hero headline — large, semi-bold/bold, tight tracking, cinematic */
+.text-hero {
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 8vw, var(--text-hero));
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--text-hero-tracking);
+  line-height: var(--leading-tight);
+}
+
+/* 2. Section headings — medium-large, medium/semi-bold, clear authority */
+.text-display {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4vw, var(--text-display));
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--text-display-tracking);
+  line-height: var(--leading-snug);
+}
+
+.text-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: var(--leading-snug);
+}
+
+.text-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  line-height: var(--leading-snug);
+}
+
+.text-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-snug);
+}
+
+/* 3. Body — comfortable size, regular weight, generous line height */
+.text-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-normal);
+}
+
+.text-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-relaxed);
+}
+
+/* 4. Captions / metadata — smaller scale, slightly reduced opacity */
+.text-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+.text-meta {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-subtle);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: var(--leading-normal);
+}
+
+/* Hero role / headline — larger than caption, professional presence */
+.text-hero-role {
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: var(--leading-snug);
+}
+
+/* Hero body — slightly larger for readability */
+.text-hero-body {
+  font-size: clamp(1.0625rem, 1.75vw, 1.25rem);
+  font-weight: 400;
+  line-height: var(--leading-relaxed);
+}
+
+/* Hero tags / descriptors */
+.text-hero-tags {
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: var(--leading-normal);
+}
+
+/* ==========================================================================
+   LAYOUT & SCROLL
+   ========================================================================== */
+
+.scroll-smooth-enabled {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-smooth-enabled {
+    scroll-behavior: auto;
+  }
+}
+
+/* Page content sits above noise, below transition layer */
+.page-content {
+  position: relative;
+  z-index: var(--z-content);
+  min-height: 100vh;
+}
+
+/* Section spacing rhythm */
+.section-spacing {
+  padding-block: var(--space-section);
+}
+
+.section-spacing-sm {
+  padding-block: var(--space-section-sm);
+}
+
+/* ==========================================================================
+   GLOBAL HEADER
+   ========================================================================== */
+
+.global-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--space-page-x);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    height var(--header-transition-duration) var(--header-transition-ease),
+    background-color var(--header-transition-duration) var(--header-transition-ease),
+    backdrop-filter var(--header-transition-duration) var(--header-transition-ease),
+    -webkit-backdrop-filter var(--header-transition-duration) var(--header-transition-ease);
+}
+
+.global-header--scrolled {
+  height: var(--header-height-scrolled);
+  background: rgba(2, 6, 23, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .global-header--scrolled {
+  background: rgba(250, 250, 249, 0.4);
+}
+
+.global-header-inner {
+  width: 100%;
+  max-width: 90rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-gutter);
+}
+
+.header-logo {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s var(--header-transition-ease);
+  background: transparent;
+}
+
+.header-logo:hover {
+  color: var(--color-text-muted);
+}
+
+.header-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-gutter-lg);
+  }
+}
+
+/* Nav link — animated underline on hover */
+.header-nav-link {
+  position: relative;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding-block: 0.5rem;
+  transition: color 0.25s var(--header-transition-ease);
+}
+
+.header-nav-link:hover,
+.header-nav-link:focus-visible {
+  color: var(--color-text);
+}
+
+.header-nav-link-inner {
+  position: relative;
+  display: inline-block;
+}
+
+.header-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.25rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--header-transition-ease);
+}
+
+.header-nav-link:hover::after,
+.header-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   GLOBAL FOOTER
+   ========================================================================== */
+
+.global-footer {
+  z-index: var(--z-footer);
+}
+
+.global-footer-link {
+  position: relative;
+}
+
+.global-footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out-expo);
+}
+
+.global-footer-link:hover::after,
+.global-footer-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@keyframes footer-line-glow {
+  0%, 100% { opacity: 0.75; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.15); }
+}
+
+.global-footer .footer-line-glow {
+  animation: footer-line-glow 3s ease-in-out infinite;
+}
+
+.global-footer .footer-cta-btn {
+  transition: background-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+}
+
+.global-footer .footer-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.global-footer .footer-cta-btn .footer-cta-arrow {
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.global-footer .footer-cta-btn:hover .footer-cta-arrow {
+  transform: translateX(4px);
+}
+
+.global-footer .footer-social {
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+}
+
+.global-footer .footer-social:hover {
+  box-shadow: 0 0 0 2px var(--color-accent);
+  transform: scale(1.08);
+}
+
+/* Page CTA Section — professional button hovers */
+.page-cta-primary {
+  transition: background-color 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+}
+
+.page-cta-primary:hover {
+  transform: translateY(-2px);
+}
+
+.page-cta-secondary {
+  transition: background-color 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+}
+
+.page-cta-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.header-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 0.375rem;
+  transition:
+    color 0.2s var(--header-transition-ease),
+    background-color 0.2s var(--header-transition-ease);
+}
+
+.header-theme-toggle:hover,
+.header-theme-toggle:focus-visible {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-text) 0.08, transparent);
+}
+
+.header-theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s var(--header-transition-ease);
+}
+
+.header-theme-toggle:hover .header-theme-icon {
+  transform: rotate(12deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-theme-toggle:hover .header-theme-icon {
+    transform: none;
+  }
+}
+
+/* Mobile trigger (hamburger) */
+.header-mobile-trigger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .header-mobile-trigger {
+    display: none;
+  }
+}
+
+.header-mobile-trigger-bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  transition:
+    transform 0.3s var(--header-transition-ease),
+    opacity 0.2s ease;
+}
+
+.global-header--mobile-open .header-mobile-trigger-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.global-header--mobile-open .header-mobile-trigger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.global-header--mobile-open .header-mobile-trigger-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile menu */
+.header-mobile-menu {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: calc(var(--z-header) - 1);
+  background: var(--color-bg);
+  padding: var(--space-page-y) var(--space-page-x);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s var(--header-transition-ease),
+    visibility 0.3s var(--header-transition-ease);
+}
+
+.header-mobile-menu--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 2rem;
+}
+
+.header-mobile-link {
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: color 0.2s ease;
+}
+
+.header-mobile-link:hover {
+  color: var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .header-mobile-menu {
+    display: none;
+  }
+}
+
+@keyframes global-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.global-hero-center.animate-hero-fade {
+  animation: global-hero-fade-in 1.2s ease-out 0.3s forwards;
+}
+
+/* Hero CTA button — subtle pulse glow */
+@keyframes hero-cta-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.08);
+  }
+}
+
+.hero-cta-btn {
+  animation: hero-cta-pulse 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta-btn {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-hero-center.animate-hero-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
