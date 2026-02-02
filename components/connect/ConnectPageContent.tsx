@@ -65,30 +65,30 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  async function handleSubmit(e: any) {
-    e.preventDefault();
-    setLoading(true);
+  // async function handleSubmit(e: any) {
+  //   e.preventDefault();
+  //   setLoading(true);
 
-    const formData = new FormData(e.target);
+  //   const formData = new FormData(e.target);
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-      }),
-    });
+  //   const res = await fetch("/api/contact", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       name: formData.get("name"),
+  //       email: formData.get("email"),
+  //       message: formData.get("message"),
+  //     }),
+  //   });
 
-    setLoading(false);
+  //   setLoading(false);
 
-    if (res.ok) {
-      alert("Message sent!");
-      e.target.reset();
-    } else {
-      alert("Error sending message");
-    }
-  }
+  //   if (res.ok) {
+  //     alert("Message sent!");
+  //     e.target.reset();
+  //   } else {
+  //     alert("Error sending message");
+  //   }
+  // }
   return (
     <div className="bg-black text-white min-h-screen selection:bg-blue-500/30">
       {/* Abstract Background Elements */}
@@ -175,7 +175,9 @@ export default function App() {
               {/* Right Column: Contact Form */}
               <div className="relative">
                 <div className="p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/30 border border-white/5 backdrop-blur-sm">
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form 
+                  // onSubmit={handleSubmit} 
+                  className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Name</label>
