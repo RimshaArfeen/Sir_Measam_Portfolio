@@ -52,9 +52,13 @@ const LEADERSHIP = [
 ];
 
 // Custom Hook for Scroll Reveal
-function useIntersectionObserver(options = {}) {
+interface IntersectionObserverOptionsExtended extends IntersectionObserverInit {
+  once?: boolean;
+}
+
+function useIntersectionObserver(options: IntersectionObserverOptionsExtended = {}) {
   const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef(null);
+  const elementRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -72,7 +76,7 @@ function useIntersectionObserver(options = {}) {
     };
   }, [options]);
 
-  return [elementRef, isVisible];
+  return [elementRef, isVisible] as const;
 }
 
 export default function App() {
@@ -254,29 +258,57 @@ export default function App() {
   );
 }
 
-// Sub-components for cleaner structure
-function SectionHeader({ accent, title, subtitle }) {
+// SectionHeader Props
+interface SectionHeaderProps {
+  accent: string;
+  title: string;
+  subtitle: string;
+}
+
+function SectionHeader({ accent, title, subtitle }: SectionHeaderProps) {
   const [ref, visible] = useIntersectionObserver({ threshold: 0.2, once: true });
   return (
-    <div ref={ref} className={`mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <div
+      ref={ref as React.Ref<HTMLDivElement>}
+      className={`mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+    >
       <h2 className={`${accent} text-xs font-bold uppercase tracking-[0.4em] mb-4`}>{title}</h2>
       <h3 className="text-4xl md:text-6xl font-bold tracking-tight">{subtitle}</h3>
     </div>
   );
 }
 
-function ScrollSection({ title, subtitle, icon, accent, children }) {
+// ScrollSection Props
+interface ScrollSectionProps {
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+  accent: string;
+  children: React.ReactNode;
+}
+
+function ScrollSection({ title, subtitle, icon, accent, children }: ScrollSectionProps) {
   const [ref, visible] = useIntersectionObserver({ threshold: 0.1, once: true });
   return (
-    <section ref={ref} className="relative z-10 px-6 md:px-24 py-24">
+    <section
+      ref={ref as React.Ref<HTMLDivElement>}
+      className="relative z-10 px-6 md:px-24 py-24"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className={`mb-20 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div
+          className={`mb-20 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+        >
           <h2 className={`${accent} text-xs font-bold uppercase tracking-[0.4em] mb-4 flex items-center gap-3`}>
             {icon} {title}
           </h2>
           <h3 className="text-4xl md:text-6xl font-bold tracking-tight">{subtitle}</h3>
         </div>
-        <div className={`transition-all duration-1000 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div
+          className={`transition-all duration-1000 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+        >
           {children}
         </div>
       </div>

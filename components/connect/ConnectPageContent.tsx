@@ -281,8 +281,17 @@ export default function App() {
   );
 }
 
-function LookingCard({ item, index }) {
-  const [ref, visible] = useScrollReveal();
+type LookingCardProps = {
+  item: {
+    title: string;
+    desc: string;
+  };
+  index: number;
+};
+
+function LookingCard({ item, index }: LookingCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   return (
     <div

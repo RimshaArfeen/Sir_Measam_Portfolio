@@ -353,7 +353,7 @@
 // }
 
 "use client"
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, ReactNode } from 'react';
 import {
   Globe,
   Zap,
@@ -406,43 +406,60 @@ const STATS = [
   { value: 4, suffix: "", label: "World Records" },
 ];
 
-const FadeIn = ({ children, delay = 0, direction = 'up' }) => {
+
+type FadeInProps = {
+  children: ReactNode;
+  delay?: number;
+  direction?: "up" | "down" | "left" | "right" | "none";
+};
+
+
+const FadeIn = ({
+  children,
+  delay = 0,
+  direction = "up",
+}: FadeInProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
       { threshold: 0.1 }
     );
+
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   const directions = {
-    up: 'translate-y-10',
-    down: '-translate-y-10',
-    left: 'translate-x-10',
-    right: '-translate-x-10',
-    none: ''
+    up: "translate-y-10",
+    down: "-translate-y-10",
+    left: "translate-x-10",
+    right: "-translate-x-10",
+    none: "",
   };
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0 translate-x-0' : `opacity-0 ${directions[direction]}`
-        }`}
       style={{ transitionDelay: `${delay}ms` }}
+      className={`
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 translate-x-0 translate-y-0" : "opacity-0"}
+        ${!isVisible ? directions[direction] : ""}
+      `}
     >
       {children}
     </div>
   );
 };
+
 
 export default function App() {
   return (
@@ -610,7 +627,9 @@ export default function App() {
                       alt="Muhammad Measm Raza"
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop";
+                        const img = e.currentTarget;
+                        img.src =
+                          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop";
                       }}
                     />
 

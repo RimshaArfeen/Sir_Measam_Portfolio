@@ -5,29 +5,46 @@ import { BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare, Lightbulb } f
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
 import { PUBLICATIONS, BOOK } from "./researchData";
 
-
 const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
+
 export const FOCUS_AREAS = [
   {
     title: "Digital transformation of SMEs",
     desc: "How small and medium enterprises adopt technology, scale digitally, and compete in global markets.",
-    icon: <Globe className="w-6 h-6 text-cyan-400" />
+    icon: <Globe className="w-6 h-6 text-cyan-400" />,
   },
   {
     title: "Sustainability ecosystems",
     desc: "Systems thinking for climate, ESG, and impact — from verification to scalable solutions.",
-    icon: <Zap className="w-6 h-6 text-blue-500" />
+    icon: <Zap className="w-6 h-6 text-blue-500" />,
   },
   {
     title: "Technology adoption",
     desc: "Barriers, enablers, and frameworks for adoption across sectors and geographies.",
-    icon: <Lightbulb className="w-6 h-6 text-cyan-400" />
+    icon: <Lightbulb className="w-6 h-6 text-cyan-400" />,
   },
 ];
 
 const FocusAreas = () => {
+  const refs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("opacity-100", "translate-y-0");
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+
+    return () => refs.current.forEach((el) => el && observer.unobserve(el));
+  }, []);
+
   return (
-    <section className=" relative z-10">
+    <section className="relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="section-header mb-16">
           <h2 className="text-blue-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">
@@ -42,25 +59,19 @@ const FocusAreas = () => {
           {FOCUS_AREAS.map((area, i) => (
             <div
               key={i}
-              className="group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-500 overflow-hidden shadow-lg shadow-cyan-500/20"
+              ref={(el) => {
+                if (el && !refs.current.includes(el)) refs.current.push(el);
+              }}
+              className="group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-500 overflow-hidden shadow-lg shadow-cyan-500/20 opacity-0 translate-y-10"
             >
-              {/* Neon gradient top line */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
-
-              {/* Icon */}
               <div className="mb-6 p-3 rounded-lg bg-black/50 w-fit border border-cyan-400/20 group-hover:scale-110 transition-transform">
                 {area.icon}
               </div>
-
-              {/* Title */}
               <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
                 {area.title}
               </h4>
-
-              {/* Description */}
               <p className="text-gray-200 leading-relaxed text-lg">{area.desc}</p>
-
-              {/* CTA Arrow */}
               <div className="mt-8 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm text-cyan-400 font-medium">
                 Deep Dive <ArrowUpRight className="ml-1 w-4 h-4" />
               </div>
@@ -70,9 +81,12 @@ const FocusAreas = () => {
       </div>
     </section>
   );
-}
+};
 
-export function useIntersectionObserver<T extends HTMLElement>(options = {}) {
+
+export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
+  options: IntersectionObserverInit & { once?: boolean } = {}
+) {
   const elementRef = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -92,168 +106,75 @@ export function useIntersectionObserver<T extends HTMLElement>(options = {}) {
     };
   }, [options]);
 
-  return [elementRef, isVisible] as const; // <-- TS infers tuple
+  return [elementRef, isVisible] as const;
 }
-
-
 
 export default function App() {
   const containerRef = useRef(null);
-  const [gsapLoaded, setGsapLoaded] = useState(false);
-  const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
-
-  useEffect(() => {
-    // Dynamically load GSAP from CDN to avoid resolution errors
-    const loadGSAP = async () => {
-      const loadScript = (src) => {
-        return new Promise((resolve) => {
-          const script = document.createElement("script");
-          script.src = src;
-          script.onload = resolve;
-          document.head.appendChild(script);
-        });
-      };
-
-      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
-      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js");
-      setGsapLoaded(true);
-    };
-
-    loadGSAP();
-  }, []);
-
-  useEffect(() => {
-    if (!gsapLoaded || !window.gsap) return;
-
-    const gsap = window.gsap;
-    const ScrollTrigger = window.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // Hero Animation
-      gsap.from(".hero-title span", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.05,
-        ease: "power4.out",
-      });
-
-      gsap.from(".hero-tagline", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        delay: 0.8,
-        ease: "power3.out"
-      });
-
-      // Section Headers
-      gsap.utils.toArray(".section-header").forEach((header) => {
-        gsap.from(header, {
-          scrollTrigger: {
-            trigger: header,
-            start: "top 85%",
-          },
-          opacity: 0,
-          x: -30,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-      });
-
-      // Cards Animation
-      gsap.from(".focus-card", {
-        scrollTrigger: {
-          trigger: ".focus-grid",
-          start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "back.out(1.7)"
-      });
-
-      // Publications Entrance
-      gsap.from(".pub-row", {
-        scrollTrigger: {
-          trigger: ".pub-container",
-          start: "top 80%",
-        },
-        opacity: 0,
-        x: -50,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power3.out"
-      });
-
-      // Book Section Glow
-      gsap.to(".book-glow", {
-        opacity: 0.6,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [gsapLoaded]);
+  const [heroRef, heroVisible] = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    once: true,
+  });
 
   return (
-    <div ref={containerRef} className="bg-black/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen">
-      {/* Background Decor */}
+    <div
+      ref={containerRef}
+      className="bg-black/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen"
+    >
+      {/* Background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-900/10 blur-[120px] rounded-full" />
-        <AnimatedBeamsBackground/>
+        <AnimatedBeamsBackground />
       </div>
 
-      {/* Hero Text */}
-      <div ref={heroRef} className="relative z-10 max-w-7xl py-24 px-20 pt-36">
-        <div className="mb-6 overflow-hidden">
-          <p className={`text-blue-500 font-mono tracking-[0.5em] uppercase text-sm transform transition-all duration-1000 delay-100 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-            Research Portfolio
-          </p>
-        </div>
+      {/* Hero */}
+      <div
+        ref={heroRef}
+        className={`relative z-10 max-w-7xl py-24 px-20 pt-36 transition-all duration-1000 ${heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+      >
+        <p className="text-blue-500 font-mono tracking-[0.5em] uppercase text-sm mb-6 transform transition-all duration-1000">
+          Research Portfolio
+        </p>
 
         <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
           {"Research".split("").map((char, i) => (
-            <span key={i} className="inline-block overflow-hidden">
-              <span
-                className={`inline-block opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]`}
-                style={{ animationDelay: `${0.1 + i * 0.08}s` }}
-              >
-                {char}
-              </span>
+            <span
+              key={i}
+              className="inline-block overflow-hidden opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+              style={{ animationDelay: `${0.1 + i * 0.08}s` }}
+            >
+              {char}
             </span>
           ))}
-          <span className="text-cyan-400 opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{ animationDelay: '0.6s' }}>.</span>
+          <span
+            className="text-cyan-400 opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+            style={{ animationDelay: "0.6s" }}
+          >
+            .
+          </span>
         </h1>
 
         <div className="flex flex-col md:flex-row md:items-center gap-8">
-          <div className={`h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left opacity-0 transition-all duration-1000 ${heroVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
-          <p className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+          <div
+            className={`h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left transition-all duration-1000 ${heroVisible ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
+              }`}
+          />
+          <p
+            className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-500 ${heroVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+              }`}
+          >
             {HERO_TAGLINE}
           </p>
         </div>
       </div>
 
-      {/* Animations via Tailwind + inline */}
-      <style jsx>{`
-        @keyframes revealText {
-          0% { transform: translateY(100%); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
-        }
-      `}</style>
-
       {/* Focus Areas */}
       <section className="px-6 md:px-20 py-24 relative z-10">
-
         <FocusAreas />
-
-
       </section>
+
 
       {/* Publications */}
       <section className="px-6 md:px-20 py-24 bg-zinc-950/50">

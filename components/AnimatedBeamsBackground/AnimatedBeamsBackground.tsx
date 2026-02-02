@@ -1,10 +1,22 @@
-"use client"
+"use client";
 import React, { useEffect, useRef, useState } from 'react';
+
+type Beam = {
+     isHorizontal: boolean;
+     x: number;
+     y: number;
+     size: number;
+     length: number;
+     speed: number;
+     color: string;
+     opacity: number;
+     isPersistent: boolean;
+};
 
 // --- ANIMATED BEAMS COMPONENT ---
 const AnimatedBeamsBackground = () => {
-     const canvasRef = useRef(null);
-     const beamsRef = useRef([]);
+     const canvasRef = useRef<HTMLCanvasElement>(null);
+     const beamsRef = useRef<Beam[]>([]);
 
      useEffect(() => {
           const canvas = canvasRef.current;
@@ -13,18 +25,18 @@ const AnimatedBeamsBackground = () => {
           const ctx = canvas.getContext('2d');
           if (!ctx) return;
 
-          let animationFrameId;
-          let width, height;
+          let animationFrameId: number;
+          let width: number, height: number;
 
           const baseBeamCount = 60;
           const maxBeams = 100;
 
-          const createBeam = (isInitial = false, customX = null, customY = null) => {
+          const createBeam = (isInitial = false, customX: number | null = null, customY: number | null = null): Beam => {
                const isHorizontal = Math.random() > 0.8;
                const speed = Math.random() * 0.7 + 0.7;
                const size = Math.random() * 2.5 + 1.2;
 
-               let x, y;
+               let x: number, y: number;
                if (customX !== null && customY !== null) {
                     x = isHorizontal ? customX - 200 : customX;
                     y = isHorizontal ? customY : customY - 200;
@@ -44,17 +56,16 @@ const AnimatedBeamsBackground = () => {
                     size,
                     length: Math.random() * 400 + 200,
                     speed,
-                    // Electric Blue and Cyan for beams
                     color: Math.random() > 0.5 ? '#2563eb' : '#22d3ee',
                     opacity: Math.random() * 0.5 + 0.25,
-                    isPersistent: customX === null
+                    isPersistent: customX === null,
                };
           };
 
-          const handleInteraction = (e) => {
+          const handleInteraction = (e: MouseEvent | TouchEvent) => {
                const rect = canvas.getBoundingClientRect();
-               const clientX = e.clientX || e.touches?.[0]?.clientX;
-               const clientY = e.clientY || e.touches?.[0]?.clientY;
+               const clientX = 'clientX' in e ? e.clientX : e.touches?.[0]?.clientX;
+               const clientY = 'clientY' in e ? e.clientY : e.touches?.[0]?.clientY;
 
                if (clientX === undefined || clientY === undefined) return;
 
@@ -154,29 +165,22 @@ const AnimatedBeamsBackground = () => {
 
      return (
           <div className="fixed inset-0 -z-10 bg-black overflow-hidden">
-               {/* Darker deep-space blue radial glow */}
                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#1e3a8a_0%,#000000_80%)] opacity-30" />
-
                <canvas
                     ref={canvasRef}
                     className="absolute inset-0 w-full h-full cursor-crosshair"
-                    style={{
-                         filter: 'blur(0.4px) drop-shadow(0 0 12px rgba(34, 211, 238, 0.3))',
-                    }}
+                    style={{ filter: 'blur(0.4px) drop-shadow(0 0 12px rgba(34, 211, 238, 0.3))' }}
                />
-
-               {/* Grid overlay in Cyan */}
                <div
                     className="absolute inset-0 opacity-[0.03] pointer-events-none"
                     style={{
                          backgroundImage: `linear-gradient(#22d3ee 1px, transparent 1px), linear-gradient(90deg, #22d3ee 1px, transparent 1px)`,
-                         backgroundSize: '80px 80px'
+                         backgroundSize: '80px 80px',
                     }}
                />
-
                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_90%)] pointer-events-none" />
           </div>
      );
 };
 
-export default AnimatedBeamsBackground
+export default AnimatedBeamsBackground;
