@@ -1,329 +1,285 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLenis } from "@/providers";
-import { PageCTASection } from "@/components/PageCTASection";
+import React, { useRef, useEffect, useState } from "react";
+import { Award, Globe, Users, Star, ExternalLink, ShieldCheck, MessageCircle, ArrowRight } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const HERO_TAGLINE =
-  "Global Recognition & Service — proof of responsibility.";
+const HERO_TAGLINE = "Global Recognition & Service — proof of responsibility.";
 
 const AWARDS = [
   {
     title: "Oxford Scholars",
     items: ["Scholarships", "Global programs"],
     desc: "Recognition and support through Oxford-affiliated programs and global scholarship initiatives.",
+    icon: <Award className="w-8 h-8 text-cyan-400" />
   },
   {
     title: "Nominations",
     items: ["Peace prizes", "Changemaker awards"],
     desc: "Nominated for peace, changemaking, and youth leadership awards at regional and global levels.",
+    icon: <Star className="w-8 h-8 text-blue-500" />
   },
 ];
 
 const PROGRAMS = [
-  { title: "Yale", desc: "Leadership and global affairs programs." },
-  { title: "Google", desc: "Certifications and innovation programs." },
-  { title: "TKS", desc: "The Knowledge Society — innovation and future-building." },
-  { title: "LaunchX", desc: "Entrepreneurship and venture-building." },
-  { title: "LeanGap", desc: "Lean methodology and execution frameworks." },
+  { title: "Yale", desc: "Leadership and global affairs programs.", color: "border-blue-600" },
+  { title: "Google", desc: "Certifications and innovation programs.", color: "border-cyan-500" },
+  { title: "TKS", desc: "The Knowledge Society — innovation and future-building.", color: "border-blue-400" },
+  { title: "LaunchX", desc: "Entrepreneurship and venture-building.", color: "border-cyan-600" },
+  { title: "LeanGap", desc: "Lean methodology and execution frameworks.", color: "border-blue-500" },
 ];
 
 const LEADERSHIP = [
-  { title: "UNICEF", body: "Partnerships and initiatives with UNICEF in youth, education, and sustainable development." },
-  { title: "Global ambassador roles", body: "Representing organizations and causes on global stages — policy, sustainability, and youth." },
-  { title: "Conferences", body: "Speaking and facilitating at international conferences on entrepreneurship, climate, and impact." },
-  { title: "Bootcamps", body: "Designing and leading bootcamps and capacity-building programs for founders and leaders." },
+  {
+    title: "UNICEF",
+    body: "Partnerships and initiatives with UNICEF in youth, education, and sustainable development.",
+    stat: "Global Youth Advocate"
+  },
+  {
+    title: "Global ambassador roles",
+    body: "Representing organizations and causes on global stages — policy, sustainability, and youth.",
+    stat: "Diplomatic Representation"
+  },
+  {
+    title: "Conferences",
+    body: "Speaking and facilitating at international conferences on entrepreneurship, climate, and impact.",
+    stat: "Public Address"
+  },
+  {
+    title: "Bootcamps",
+    body: "Designing and leading bootcamps and capacity-building programs for founders and leaders.",
+    stat: "Strategic Mentorship"
+  },
 ];
 
-export function ImpactPageContent() {
-  const lenis = useLenis();
-  const heroRef = useRef<HTMLElement>(null);
-  const titleCharsRef = useRef<HTMLSpanElement[]>([]);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const awardsCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const programCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const leadershipCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  useEffect(() => {
-    if (lenis) {
-      ScrollTrigger.scrollerProxy(document.documentElement, {
-        scrollTop: () => lenis.scroll,
-        getBoundingClientRect: () => ({
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        }),
-      });
-      const onScroll = () => ScrollTrigger.update();
-      lenis.on("scroll", onScroll);
-      ScrollTrigger.refresh();
-      return () => lenis.off("scroll", onScroll);
-    }
-  }, [lenis]);
+// Custom Hook for Scroll Reveal
+function useIntersectionObserver(options = {}) {
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef(null);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reducedMotion) {
-      gsap.set(
-        [
-          taglineRef.current,
-          ...awardsCardsRef.current,
-          ...programCardsRef.current,
-          ...leadershipCardsRef.current,
-        ].filter(Boolean),
-        { opacity: 1, y: 0, scale: 1, x: 0 }
-      );
-      titleCharsRef.current.forEach((el) => el && gsap.set(el, { opacity: 1, y: 0 }));
-      return;
-    }
-
-    const chars = titleCharsRef.current.filter(Boolean);
-    const tagline = taglineRef.current;
-    const hero = heroRef.current;
-
-    const runHeroAnimation = () => {
-      if (chars.length) {
-        gsap.set(chars, { opacity: 0, y: 60 });
-        gsap.to(chars, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.04,
-          ease: "back.out(1.2)",
-          delay: 0.2,
-        });
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if (options.once) observer.unobserve(entry.target);
       }
-      if (tagline) {
-        gsap.set(tagline, { opacity: 0, y: 32 });
-        gsap.to(tagline, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          delay: 0.8,
-          ease: "power3.out",
-        });
-      }
-    };
+    }, options);
 
-    if (chars.length) gsap.set(chars, { opacity: 0, y: 60 });
-    if (tagline) gsap.set(tagline, { opacity: 0, y: 32 });
+    const currentElement = elementRef.current;
+    if (currentElement) observer.observe(currentElement);
 
-    if (hero) {
-      ScrollTrigger.create({
-        trigger: hero,
-        start: "bottom top",
-        onEnter: runHeroAnimation,
-        onEnterBack: runHeroAnimation,
-      });
-      if (hero.getBoundingClientRect().top < window.innerHeight) runHeroAnimation();
-    }
-
-    const runCardAnimation = (el: HTMLDivElement, i: number) => {
-      gsap.set(el, { opacity: 0, y: 80, scale: 0.92 });
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.9,
-        delay: i * 0.12,
-        ease: "back.out(1.1)",
-      });
-    };
-
-    awardsCardsRef.current.forEach((el, i) => {
-      if (!el) return;
-      gsap.set(el, { opacity: 0, y: 80, scale: 0.92 });
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
-        onEnter: () => runCardAnimation(el, i),
-        onEnterBack: () => runCardAnimation(el, i),
-      });
-    });
-
-    programCardsRef.current.forEach((el, i) => {
-      if (!el) return;
-      gsap.set(el, { opacity: 0, y: 80, scale: 0.92 });
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
-        onEnter: () => runCardAnimation(el, i),
-        onEnterBack: () => runCardAnimation(el, i),
-      });
-    });
-
-    const runLeadershipAnimation = (el: HTMLDivElement, i: number) => {
-      const fromX = i % 2 === 0 ? -80 : 80;
-      gsap.set(el, { opacity: 0, x: fromX, scale: 0.96 });
-      gsap.to(el, {
-        opacity: 1,
-        x: 0,
-        scale: 1,
-        duration: 0.85,
-        delay: i * 0.1,
-        ease: "power3.out",
-      });
-    };
-
-    leadershipCardsRef.current.forEach((el, i) => {
-      if (!el) return;
-      const fromX = i % 2 === 0 ? -80 : 80;
-      gsap.set(el, { opacity: 0, x: fromX, scale: 0.96 });
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 88%",
-        onEnter: () => runLeadershipAnimation(el, i),
-        onEnterBack: () => runLeadershipAnimation(el, i),
-      });
-    });
-
-    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100);
     return () => {
-      clearTimeout(refreshTimer);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (currentElement) observer.unobserve(currentElement);
     };
-  }, [lenis]);
+  }, [options]);
 
-  const title = "Impact";
+  return [elementRef, isVisible];
+}
+
+export default function App() {
+  const [heroRef, heroVisible] = useIntersectionObserver({ threshold: 0.1, once: true });
 
   return (
-    <main className="min-h-screen w-full overflow-hidden">
-      <section
-        ref={heroRef}
-        className="flex flex-col justify-center px-[var(--space-page-x)] pt-32 sm:pt-28 md:pt-20 pb-8 md:pb-12"
-        aria-label="Impact"
-      >
-        <h1
-          className="text-hero md:text-[clamp(3.5rem,12vw,6rem)] font-bold text-[var(--color-text)] tracking-tight mb-6 overflow-hidden"
-          style={{ lineHeight: 1.05 }}
-        >
-          {title.split("").map((char, i) => (
-            <span
-              key={i}
-              ref={(el) => {
-                if (el) titleCharsRef.current[i] = el;
-              }}
-              className="inline-block"
-              style={{ willChange: "transform" }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p
-          ref={taglineRef}
-          className="text-body-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl leading-relaxed"
-        >
-          {HERO_TAGLINE}
-        </p>
+    <div className="bg-black text-white font-sans selection:bg-blue-500/30 min-h-screen overflow-x-hidden">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes revealText {
+          0% { transform: translateY(100%); opacity: 0; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes scaleLine {
+          0% { transform: scaleX(0); opacity: 0; }
+          100% { transform: scaleX(1); opacity: 1; }
+        }
+        .animate-reveal { animation: revealText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-line { animation: scaleLine 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
+      `}} />
+
+      {/* Dynamic Background Blur */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-blue-600/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-cyan-600/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
+      </div>
+
+      {/* Hero Section */}
+      <section ref={heroRef} className="relative min-h-[85vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16">
+        <div className="max-w-7xl">
+          <div className="mb-6 overflow-hidden">
+            <p className={`text-blue-500 font-mono tracking-[0.5em] uppercase text-sm transform transition-all duration-1000 delay-100 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+              Responsibility Portfolio
+            </p>
+          </div>
+
+          <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
+            {"Impact".split("").map((char, i) => (
+              <span key={i} className="inline-block overflow-hidden">
+                <span
+                  className={`inline-block animate-reveal opacity-0`}
+                  style={{ animationDelay: `${0.1 + i * 0.08}s` }}
+                >
+                  {char}
+                </span>
+              </span>
+            ))}
+            <span className="text-blue-600 animate-reveal opacity-0" style={{ animationDelay: '0.6s' }}>.</span>
+          </h1>
+
+          <div className="flex flex-col md:flex-row md:items-center gap-8">
+            <div className="animate-line h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left opacity-0" style={{ animationDelay: '0.8s' }} />
+            <p className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-1000 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+              {HERO_TAGLINE}
+            </p>
+          </div>
+        </div>
       </section>
 
-      <section
-        className="px-[var(--space-page-x)] pt-8 md:pt-10 pb-10 md:pb-14 border-t border-[var(--color-border)]"
-        aria-label="Awards & Recognition"
-      >
-        <div className="max-w-5xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-6">
-            Awards & Recognition
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {AWARDS.map((award, i) => (
-              <div
-                key={award.title}
-                ref={(el) => {
-                  awardsCardsRef.current[i] = el;
-                }}
-                className="p-8 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors duration-300"
-              >
-                <h3 className="text-h2 text-[var(--color-text)] mb-3">
+      {/* Awards & Recognition */}
+      <ScrollSection title="Recognition" subtitle="Awards & Recognition" icon={<ShieldCheck className="w-4 h-4" />} accent="text-blue-500">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {AWARDS.map((award, i) => (
+            <div
+              key={i}
+              style={{ transitionDelay: `${i * 150}ms` }}
+              className="group relative p-10 md:p-14 rounded-[2.5rem] bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-10 p-4 rounded-2xl bg-black w-fit border border-white/10 group-hover:scale-110 transition-transform duration-500">
+                  {award.icon}
+                </div>
+                <h4 className="text-3xl md:text-4xl font-bold mb-6 group-hover:text-cyan-400 transition-colors">
                   {award.title}
-                </h3>
-                <ul className="list-none space-y-1 mb-4">
-                  {award.items.map((item) => (
-                    <li key={item} className="flex gap-2 text-body text-[var(--color-text-muted)]">
-                      <span className="text-[var(--color-accent)]">•</span>
+                </h4>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {award.items.map((item, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-gray-400 uppercase tracking-widest">
                       {item}
-                    </li>
+                    </span>
                   ))}
-                </ul>
-                <p className="text-body text-[var(--color-text-subtle)] leading-relaxed">
+                </div>
+                <p className="text-xl text-gray-400 leading-relaxed font-light">
                   {award.desc}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
+      </ScrollSection>
 
-      <section
-        className="px-[var(--space-page-x)] pt-8 md:pt-10 pb-10 md:pb-14 border-t border-[var(--color-border)]"
-        aria-label="Global Programs & Certifications"
-      >
-        <div className="max-w-5xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-6">
-            Global Programs & Certifications
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+      {/* Global Programs */}
+      <section className="relative z-10 px-6 md:px-24 py-32 bg-zinc-950/30">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader accent="text-cyan-400" title="Academic & Corporate Path" subtitle="Global Programs" />
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {PROGRAMS.map((program, i) => (
               <div
-                key={program.title}
-                ref={(el) => {
-                  programCardsRef.current[i] = el;
-                }}
-                className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors duration-300"
+                key={i}
+                style={{ transitionDelay: `${i * 100}ms` }}
+                className={`p-8 rounded-3xl bg-zinc-900/50 border-t-4 ${program.color} hover:bg-zinc-800 transition-all cursor-default group`}
               >
-                <h3 className="text-h2 text-[var(--color-text)] mb-2">
-                  {program.title}
-                </h3>
-                <p className="text-body text-[var(--color-text-muted)] leading-relaxed text-sm">
-                  {program.desc}
-                </p>
+                <h4 className="text-xl font-bold mb-4 group-hover:translate-x-1 transition-transform">{program.title}</h4>
+                <p className="text-xs text-gray-500 leading-relaxed">{program.desc}</p>
+                <ExternalLink className="w-4 h-4 mt-6 text-gray-700 group-hover:text-cyan-500 transition-colors" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        className="px-[var(--space-page-x)] py-10 md:py-14 border-t border-[var(--color-border)]"
-        aria-label="Leadership & Service"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-8">
-            Leadership & Service
-          </p>
-          <div className="space-y-0">
-            {LEADERSHIP.map((item, i) => (
-              <div
-                key={item.title}
-                ref={(el) => {
-                  leadershipCardsRef.current[i] = el;
-                }}
-                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 py-6 border-b border-[var(--color-border)] last:border-0"
-              >
-                <h3 className="text-h2 text-[var(--color-accent)] font-semibold md:w-2/5 shrink-0">
+      {/* Leadership & Service */}
+      <ScrollSection title="Global Citizenship" subtitle="Leadership & Service" icon={<Users className="w-4 h-4" />} accent="text-blue-500">
+        <div className="space-y-4">
+          {LEADERSHIP.map((item, i) => (
+            <div
+              key={i}
+              style={{ transitionDelay: `${i * 150}ms` }}
+              className="group flex flex-col md:flex-row md:items-center gap-8 p-10 rounded-[2rem] hover:bg-white/[0.03] transition-all border border-transparent hover:border-white/5"
+            >
+              <div className="md:w-1/3">
+                <p className="text-cyan-500 font-mono text-[10px] uppercase tracking-widest mb-2">{item.stat}</p>
+                <h4 className="text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">
                   {item.title}
-                </h3>
-                <p className="text-body-lg text-[var(--color-text-muted)] md:w-3/5 leading-relaxed">
+                </h4>
+              </div>
+              <div className="md:w-2/3">
+                <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
                   {item.body}
                 </p>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </ScrollSection>
+
+      {/* High-Impact CTA */}
+      <section className="relative z-10 px-6 md:px-24 py-32">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative rounded-[3.5rem] p-12 md:p-24 bg-gradient-to-br from-blue-900/20 to-black border border-white/10 overflow-hidden group text-center">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full group-hover:scale-125 transition-transform duration-1000" />
+
+            <h2 className="relative z-10 text-4xl md:text-7xl font-bold text-white mb-8 tracking-tighter leading-none">
+              Impact = proof of responsibility
+            </h2>
+            <p className="relative z-10 text-xl md:text-2xl text-gray-400 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
+              Real-world influence beyond business — awards, programs, and service that demonstrate commitment to global impact.
+            </p>
+
+            <div className="relative z-10 flex flex-col sm:flex-row gap-6 justify-center">
+              <button className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center justify-center gap-3 group">
+                Get in touch <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </button>
+              <button className="px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all flex items-center justify-center gap-3 group">
+                View Research <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      <PageCTASection
-        heading="Impact = proof of responsibility"
-        description="Real-world influence beyond business — awards, programs, and service that demonstrate commitment to global impact."
-        primaryButton={{ label: "Get in touch", href: "/connect" }}
-        secondaryButton={{ label: "View Research", href: "/research" }}
-      />
-    </main>
+      {/* Footer */}
+      <footer className="py-20 border-t border-white/5 px-6 md:px-24 text-center md:text-left">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+          <div className="text-[10px] font-mono tracking-widest uppercase">
+            EST. 2024 / Global Impact Initiative
+          </div>
+          <div className="flex gap-8 text-[10px] font-mono tracking-widest uppercase">
+            {["Service", "Policy", "Ventures"].map(link => (
+              <a key={link} href="#" className="hover:text-cyan-400 transition-colors">{link}</a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+// Sub-components for cleaner structure
+function SectionHeader({ accent, title, subtitle }) {
+  const [ref, visible] = useIntersectionObserver({ threshold: 0.2, once: true });
+  return (
+    <div ref={ref} className={`mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <h2 className={`${accent} text-xs font-bold uppercase tracking-[0.4em] mb-4`}>{title}</h2>
+      <h3 className="text-4xl md:text-6xl font-bold tracking-tight">{subtitle}</h3>
+    </div>
+  );
+}
+
+function ScrollSection({ title, subtitle, icon, accent, children }) {
+  const [ref, visible] = useIntersectionObserver({ threshold: 0.1, once: true });
+  return (
+    <section ref={ref} className="relative z-10 px-6 md:px-24 py-24">
+      <div className="max-w-7xl mx-auto">
+        <div className={`mb-20 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className={`${accent} text-xs font-bold uppercase tracking-[0.4em] mb-4 flex items-center gap-3`}>
+            {icon} {title}
+          </h2>
+          <h3 className="text-4xl md:text-6xl font-bold tracking-tight">{subtitle}</h3>
+        </div>
+        <div className={`transition-all duration-1000 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          {children}
+        </div>
+      </div>
+    </section>
   );
 }

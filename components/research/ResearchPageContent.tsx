@@ -1,313 +1,364 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLenis } from "@/providers";
-import { PageCTASection } from "@/components/PageCTASection";
+import React, { useRef, useEffect, useState } from "react";
+import { BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare, Lightbulb } from "lucide-react";
+import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
+import { PUBLICATIONS, BOOK } from "./researchData";
 
-gsap.registerPlugin(ScrollTrigger);
 
-const HERO_TAGLINE =
-  "Intellectual Authority — depth and credibility.";
-
-const FOCUS_AREAS = [
-  { title: "Digital transformation of SMEs", desc: "How small and medium enterprises adopt technology, scale digitally, and compete in global markets." },
-  { title: "Sustainability ecosystems", desc: "Systems thinking for climate, ESG, and impact — from verification to scalable solutions." },
-  { title: "Technology adoption", desc: "Barriers, enablers, and frameworks for adoption across sectors and geographies." },
+const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
+export const FOCUS_AREAS = [
+  {
+    title: "Digital transformation of SMEs",
+    desc: "How small and medium enterprises adopt technology, scale digitally, and compete in global markets.",
+    icon: <Globe className="w-6 h-6 text-cyan-400" />
+  },
+  {
+    title: "Sustainability ecosystems",
+    desc: "Systems thinking for climate, ESG, and impact — from verification to scalable solutions.",
+    icon: <Zap className="w-6 h-6 text-blue-500" />
+  },
+  {
+    title: "Technology adoption",
+    desc: "Barriers, enablers, and frameworks for adoption across sectors and geographies.",
+    icon: <Lightbulb className="w-6 h-6 text-cyan-400" />
+  },
 ];
 
-const PUBLICATIONS = [
-  { title: "European journals", body: "Peer-reviewed work in European academic and policy outlets on entrepreneurship, sustainability, and digital economy." },
-  { title: "American journals", body: "Publications in US-based journals and conferences on technology, innovation, and global impact." },
-  { title: "Academic usage", body: "Research cited and used in curricula, dissertations, and policy work — building lasting intellectual footprint." },
-];
+const FocusAreas = () => {
+  return (
+    <section className=" relative z-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="section-header mb-16">
+          <h2 className="text-blue-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">
+            Core Specialization
+          </h2>
+          <h3 className="text-4xl md:text-5xl font-semibold text-white">
+            Research Focus Areas
+          </h3>
+        </div>
 
-const BOOK = {
-  title: "The Young Capitalist",
-  tagline: "Upcoming book on building capital, ventures, and impact from a young founder's perspective.",
-  launch: "Launch details and pre-order information coming soon — global release planned.",
-};
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {FOCUS_AREAS.map((area, i) => (
+            <div
+              key={i}
+              className="group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-500 overflow-hidden shadow-lg shadow-cyan-500/20"
+            >
+              {/* Neon gradient top line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
 
-export function ResearchPageContent() {
-  const lenis = useLenis();
-  const heroRef = useRef<HTMLElement>(null);
-  const titleCharsRef = useRef<HTMLSpanElement[]>([]);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const focusCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const pubCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const bookRef = useRef<HTMLDivElement>(null);
+              {/* Icon */}
+              <div className="mb-6 p-3 rounded-lg bg-black/50 w-fit border border-cyan-400/20 group-hover:scale-110 transition-transform">
+                {area.icon}
+              </div>
+
+              {/* Title */}
+              <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
+                {area.title}
+              </h4>
+
+              {/* Description */}
+              <p className="text-gray-200 leading-relaxed text-lg">{area.desc}</p>
+
+              {/* CTA Arrow */}
+              <div className="mt-8 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm text-cyan-400 font-medium">
+                Deep Dive <ArrowUpRight className="ml-1 w-4 h-4" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function useIntersectionObserver<T extends HTMLElement>(options = {}) {
+  const elementRef = useRef<T>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
-    if (lenis) {
-      ScrollTrigger.scrollerProxy(document.documentElement, {
-        scrollTop: () => lenis.scroll,
-        getBoundingClientRect: () => ({
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        }),
-      });
-      const onScroll = () => ScrollTrigger.update();
-      lenis.on("scroll", onScroll);
-      ScrollTrigger.refresh();
-      return () => lenis.off("scroll", onScroll);
-    }
-  }, [lenis]);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reducedMotion) {
-      gsap.set(
-        [
-          taglineRef.current,
-          ...focusCardsRef.current,
-          ...pubCardsRef.current,
-          bookRef.current,
-        ].filter(Boolean),
-        { opacity: 1, y: 0, scale: 1, x: 0 }
-      );
-      titleCharsRef.current.forEach((el) => el && gsap.set(el, { opacity: 1, y: 0 }));
-      return;
-    }
-
-    const chars = titleCharsRef.current.filter(Boolean);
-    const tagline = taglineRef.current;
-    const hero = heroRef.current;
-
-    const runHeroAnimation = () => {
-      if (chars.length) {
-        gsap.set(chars, { opacity: 0, y: 60 });
-        gsap.to(chars, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.04,
-          ease: "back.out(1.2)",
-          delay: 0.2,
-        });
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if ((options as any).once) observer.unobserve(entry.target);
       }
-      if (tagline) {
-        gsap.set(tagline, { opacity: 0, y: 32 });
-        gsap.to(tagline, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          delay: 0.8,
-          ease: "power3.out",
-        });
-      }
-    };
+    }, options);
 
-    if (chars.length) gsap.set(chars, { opacity: 0, y: 60 });
-    if (tagline) gsap.set(tagline, { opacity: 0, y: 32 });
+    const current = elementRef.current;
+    if (current) observer.observe(current);
 
-    if (hero) {
-      ScrollTrigger.create({
-        trigger: hero,
-        start: "bottom top",
-        onEnter: runHeroAnimation,
-        onEnterBack: runHeroAnimation,
-      });
-      if (hero.getBoundingClientRect().top < window.innerHeight) runHeroAnimation();
-    }
-
-    const runCardAnimation = (el: HTMLDivElement, i: number) => {
-      gsap.set(el, { opacity: 0, y: 80, scale: 0.92 });
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.9,
-        delay: i * 0.12,
-        ease: "back.out(1.1)",
-      });
-    };
-
-    focusCardsRef.current.forEach((el, i) => {
-      if (!el) return;
-      gsap.set(el, { opacity: 0, y: 80, scale: 0.92 });
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
-        onEnter: () => runCardAnimation(el, i),
-        onEnterBack: () => runCardAnimation(el, i),
-      });
-    });
-
-    const runPubAnimation = (el: HTMLDivElement, i: number) => {
-      const fromX = i % 2 === 0 ? -80 : 80;
-      gsap.set(el, { opacity: 0, x: fromX, scale: 0.96 });
-      gsap.to(el, {
-        opacity: 1,
-        x: 0,
-        scale: 1,
-        duration: 0.85,
-        delay: i * 0.1,
-        ease: "power3.out",
-      });
-    };
-
-    pubCardsRef.current.forEach((el, i) => {
-      if (!el) return;
-      const fromX = i % 2 === 0 ? -80 : 80;
-      gsap.set(el, { opacity: 0, x: fromX, scale: 0.96 });
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 88%",
-        onEnter: () => runPubAnimation(el, i),
-        onEnterBack: () => runPubAnimation(el, i),
-      });
-    });
-
-    const runBookAnimation = () => {
-      if (!bookRef.current) return;
-      const el = bookRef.current;
-      gsap.set(el, { opacity: 0, y: 72, scale: 0.94 });
-      gsap.to(el, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "back.out(1.1)" });
-    };
-
-    if (bookRef.current) {
-      gsap.set(bookRef.current, { opacity: 0, y: 72, scale: 0.94 });
-      ScrollTrigger.create({
-        trigger: bookRef.current,
-        start: "top 88%",
-        onEnter: runBookAnimation,
-        onEnterBack: runBookAnimation,
-      });
-    }
-
-    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100);
     return () => {
-      clearTimeout(refreshTimer);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (current) observer.unobserve(current);
     };
-  }, [lenis]);
+  }, [options]);
 
-  const title = "Research";
+  return [elementRef, isVisible] as const; // <-- TS infers tuple
+}
+
+
+
+export default function App() {
+  const containerRef = useRef(null);
+  const [gsapLoaded, setGsapLoaded] = useState(false);
+  const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
+
+  useEffect(() => {
+    // Dynamically load GSAP from CDN to avoid resolution errors
+    const loadGSAP = async () => {
+      const loadScript = (src) => {
+        return new Promise((resolve) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.onload = resolve;
+          document.head.appendChild(script);
+        });
+      };
+
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js");
+      setGsapLoaded(true);
+    };
+
+    loadGSAP();
+  }, []);
+
+  useEffect(() => {
+    if (!gsapLoaded || !window.gsap) return;
+
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Hero Animation
+      gsap.from(".hero-title span", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.05,
+        ease: "power4.out",
+      });
+
+      gsap.from(".hero-tagline", {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        delay: 0.8,
+        ease: "power3.out"
+      });
+
+      // Section Headers
+      gsap.utils.toArray(".section-header").forEach((header) => {
+        gsap.from(header, {
+          scrollTrigger: {
+            trigger: header,
+            start: "top 85%",
+          },
+          opacity: 0,
+          x: -30,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+
+      // Cards Animation
+      gsap.from(".focus-card", {
+        scrollTrigger: {
+          trigger: ".focus-grid",
+          start: "top 80%",
+        },
+        y: 60,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      });
+
+      // Publications Entrance
+      gsap.from(".pub-row", {
+        scrollTrigger: {
+          trigger: ".pub-container",
+          start: "top 80%",
+        },
+        opacity: 0,
+        x: -50,
+        stagger: 0.15,
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // Book Section Glow
+      gsap.to(".book-glow", {
+        opacity: 0.6,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [gsapLoaded]);
 
   return (
-    <main className="min-h-screen w-full overflow-hidden">
-      <section
-        ref={heroRef}
-        className="flex flex-col justify-center px-[var(--space-page-x)] pt-32 sm:pt-28 md:pt-20 pb-8 md:pb-12"
-        aria-label="Research"
-      >
-        <h1
-          className="text-hero md:text-[clamp(3.5rem,12vw,6rem)] font-bold text-[var(--color-text)] tracking-tight mb-6 overflow-hidden"
-          style={{ lineHeight: 1.05 }}
-        >
-          {title.split("").map((char, i) => (
-            <span
-              key={i}
-              ref={(el) => {
-                if (el) titleCharsRef.current[i] = el;
-              }}
-              className="inline-block"
-              style={{ willChange: "transform" }}
-            >
-              {char === " " ? "\u00A0" : char}
+    <div ref={containerRef} className="bg-black/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen">
+      {/* Background Decor */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-900/10 blur-[120px] rounded-full" />
+        <AnimatedBeamsBackground/>
+      </div>
+
+      {/* Hero Text */}
+      <div ref={heroRef} className="relative z-10 max-w-7xl py-24 px-20 pt-36">
+        <div className="mb-6 overflow-hidden">
+          <p className={`text-blue-500 font-mono tracking-[0.5em] uppercase text-sm transform transition-all duration-1000 delay-100 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+            Research Portfolio
+          </p>
+        </div>
+
+        <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
+          {"Research".split("").map((char, i) => (
+            <span key={i} className="inline-block overflow-hidden">
+              <span
+                className={`inline-block opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]`}
+                style={{ animationDelay: `${0.1 + i * 0.08}s` }}
+              >
+                {char}
+              </span>
             </span>
           ))}
+          <span className="text-cyan-400 opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{ animationDelay: '0.6s' }}>.</span>
         </h1>
-        <p
-          ref={taglineRef}
-          className="text-body-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl leading-relaxed"
-        >
-          {HERO_TAGLINE}
-        </p>
-      </section>
 
-      <section
-        className="px-[var(--space-page-x)] pt-8 md:pt-10 pb-10 md:pb-14 border-t border-[var(--color-border)]"
-        aria-label="Research Focus Areas"
-      >
-        <div className="max-w-5xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-6">
-            Research Focus Areas
+        <div className="flex flex-col md:flex-row md:items-center gap-8">
+          <div className={`h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left opacity-0 transition-all duration-1000 ${heroVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
+          <p className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+            {HERO_TAGLINE}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {FOCUS_AREAS.map((area, i) => (
-              <div
-                key={area.title}
-                ref={(el) => {
-                  focusCardsRef.current[i] = el;
-                }}
-                className="p-8 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors duration-300"
-              >
-                <h3 className="text-h2 text-[var(--color-text)] mb-3">
-                  {area.title}
-                </h3>
-                <p className="text-body text-[var(--color-text-muted)] leading-relaxed">
-                  {area.desc}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
+      </div>
+
+      {/* Animations via Tailwind + inline */}
+      <style jsx>{`
+        @keyframes revealText {
+          0% { transform: translateY(100%); opacity: 0; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+      `}</style>
+
+      {/* Focus Areas */}
+      <section className="px-6 md:px-20 py-24 relative z-10">
+
+        <FocusAreas />
+
+
       </section>
 
-      <section
-        className="px-[var(--space-page-x)] py-10 md:py-14 border-t border-[var(--color-border)]"
-        aria-label="Publications"
-      >
-        <div className="max-w-4xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-8">
-            Publications
-          </p>
+      {/* Publications */}
+      <section className="px-6 md:px-20 py-24 bg-zinc-950/50">
+        <div className="max-w-5xl mx-auto pub-container">
+          <div className="section-header mb-16">
+            <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">Scholarly Impact</h2>
+            <h3 className="text-4xl md:text-5xl font-semibold text-white">Publications</h3>
+          </div>
+
           <div className="space-y-0">
-            {PUBLICATIONS.map((item, i) => (
+            {PUBLICATIONS.map((pub, i) => (
               <div
-                key={item.title}
-                ref={(el) => {
-                  pubCardsRef.current[i] = el;
-                }}
-                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 py-6 border-b border-[var(--color-border)] last:border-0"
+                key={i}
+                className="pub-row group flex flex-col md:flex-row gap-8 py-12 border-b border-white/10 hover:bg-white/[0.02] transition-colors px-4 rounded-lg"
               >
-                <h3 className="text-h2 text-[var(--color-accent)] font-semibold md:w-2/5 shrink-0">
-                  {item.title}
-                </h3>
-                <p className="text-body-lg text-[var(--color-text-muted)] md:w-3/5 leading-relaxed">
-                  {item.body}
-                </p>
+                <div className="md:w-1/3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-4 tracking-wider">
+                    {pub.tag}
+                  </span>
+                  <h4 className="text-3xl font-bold text-white group-hover:translate-x-2 transition-transform duration-300">
+                    {pub.title}
+                  </h4>
+                </div>
+                <div className="md:w-2/3">
+                  <p className="text-xl text-gray-400 leading-relaxed font-light">
+                    {pub.body}
+                  </p>
+                  <button className="mt-6 flex items-center text-white/50 hover:text-cyan-400 transition-colors">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    <span className="text-sm font-medium">Request Full Text</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        className="px-[var(--space-page-x)] pt-8 md:pt-10 pb-10 md:pb-14 border-t border-[var(--color-border)]"
-        aria-label="Upcoming Book"
-      >
-        <div className="max-w-3xl mx-auto">
-          <p className="text-meta text-[var(--color-accent)] font-semibold tracking-widest uppercase mb-6">
-            Upcoming Book
-          </p>
-          <div
-            ref={bookRef}
-            className="p-8 md:p-10 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors duration-300"
-          >
-            <h3 className="text-h1 text-[var(--color-text)] mb-3">
-              {BOOK.title}
-            </h3>
-            <p className="text-body-lg text-[var(--color-text-muted)] leading-relaxed mb-4">
-              {BOOK.tagline}
-            </p>
-            <p className="text-body text-[var(--color-text-subtle)]">
-              {BOOK.launch}
-            </p>
+      {/* Upcoming Book Section */}
+      <section className="px-6 md:px-20 py-32 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative p-12 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
+            {/* Animated Glow */}
+            <div className="book-glow absolute -top-24 -right-24 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-16">
+              <div className="md:w-1/2">
+                <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-6">Literary Debut</h2>
+                <h3 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+                  {BOOK.title}
+                </h3>
+                <p className="text-2xl text-gray-300 font-light mb-8 leading-relaxed">
+                  {BOOK.tagline}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all shadow-lg shadow-blue-900/20 active:scale-95">
+                    Pre-order Interest
+                  </button>
+                  <div className="flex items-center text-gray-500 px-4 text-sm font-medium border-l border-white/10">
+                    {BOOK.launch}
+                  </div>
+                </div>
+              </div>
+
+              {/* Visual Metaphor for Book */}
+              <div className="md:w-1/2 flex justify-center">
+                <div className="relative w-64 h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-12 hover:rotate-0 transition-transform duration-700">
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 border-r-4 border-blue-500/50">
+                    <Award className="text-cyan-400 w-10 h-10 mb-4" />
+                    <div className="h-1 w-12 bg-white/20 mb-4" />
+                    <span className="text-white font-black text-xl leading-tight uppercase tracking-tight">THE YOUNG CAPITALIST</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <PageCTASection
-        heading="Research = depth + credibility"
-        description="Academic and thought leadership built on published work, ongoing research, and a commitment to rigor and impact."
-        primaryButton={{ label: "Get in touch", href: "/connect" }}
-        secondaryButton={{ label: "View Impact", href: "/impact" }}
-      />
-    </main>
+      {/* CTA Section */}
+      <section className="px-6 md:px-20 py-32 bg-black border-t border-white/5 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+            Research = depth + credibility
+          </h2>
+          <p className="text-xl text-gray-400 mb-12 font-light leading-relaxed">
+            Academic and thought leadership built on published work, ongoing research, and a commitment to rigor and impact.
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <button className="group px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center">
+              Get in touch
+              <MessageSquare className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button className="px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all">
+              View Impact
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <div className="py-10 text-center border-t border-white/5 text-xs tracking-widest text-gray-600 uppercase">
+        © 2024 Intellectual Property & Ventures
+      </div>
+    </div>
   );
 }

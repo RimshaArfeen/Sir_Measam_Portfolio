@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useTheme } from "@/providers";
 import { useLenis } from "@/providers";
 
 const NAV_ITEMS = [
@@ -19,80 +18,6 @@ const NAV_ITEMS = [
 const SCROLL_THRESHOLD = 24;
 const HEADER_HEIGHT_DEFAULT = 4.5; /* rem */
 const HEADER_HEIGHT_SCROLLED = 3.5;
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div
-        className="header-theme-toggle"
-        style={{ width: "2.5rem", height: "2.5rem" }}
-        aria-hidden
-      >
-        <span className="header-theme-icon">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden
-          >
-            <circle cx="12" cy="12" r="5" />
-          </svg>
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="header-theme-toggle"
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-    >
-      <span className="header-theme-icon" aria-hidden>
-        {theme === "dark" ? (
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-          </svg>
-        ) : (
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        )}
-      </span>
-    </button>
-  );
-}
 
 function NavLink({
   label,
@@ -157,13 +82,13 @@ export function GlobalHeader() {
       role="banner"
     >
       <div className="global-header-inner">
-        <Link href="/" className="header-logo flex items-center" aria-label="Home">
+        <Link href="/" className="header-logo flex items-center gap-2" aria-label="Home">
           <Image
             src="/LOGO%20MEETECH%20%20(1).png"
             alt="Meetech Dev"
             width={440}
             height={138}
-            className="h-[7.25rem] w-auto object-contain mix-blend-multiply"
+            className="h-[5rem] md:h-[5.5rem] w-auto object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.08)]"
             priority
           />
         </Link>
@@ -175,7 +100,6 @@ export function GlobalHeader() {
         </nav>
 
         <div className="header-actions">
-          <ThemeToggle />
           <button
             type="button"
             className="header-mobile-trigger"

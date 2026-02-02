@@ -103,14 +103,9 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full min-h-[100dvh] flex flex-col justify-end overflow-hidden"
+      className="relative  w-full min-h-[100dvh] flex flex-col justify-end overflow-hidden"
       aria-label="Hero"
-      style={{
-        backgroundImage: "url(/bgpi.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+     
     >
       {/* Gradient overlay for text readability */}
       <div

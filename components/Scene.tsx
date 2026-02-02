@@ -5,33 +5,21 @@ import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
 import { Effects } from "@react-three/drei";
 import { UnrealBloomPass } from "three-stdlib";
 import * as THREE from "three";
-import { useTheme } from "@/providers/ThemeProvider";
-
 extend({ UnrealBloomPass });
 
 const NODES = 80;
 const CONNECT_THRESHOLD = 2.2;
 
+const SCENE_COLORS = {
+  nodePrimary: new THREE.Color(0.45, 0.85, 0.9),
+  nodeSecondary: new THREE.Color(0.9, 0.75, 0.4),
+  lineColor: new THREE.Color(0.3, 0.6, 0.7),
+  ambient: 0.25,
+  pointLight: 0.6,
+};
+
 function useSceneColors() {
-  const { theme } = useTheme();
-  return useMemo(() => {
-    if (theme === "light") {
-      return {
-        nodePrimary: new THREE.Color(0.1, 0.25, 0.35),
-        nodeSecondary: new THREE.Color(0.15, 0.2, 0.25),
-        lineColor: new THREE.Color(0.12, 0.2, 0.28),
-        ambient: 0.6,
-        pointLight: 0.8,
-      };
-    }
-    return {
-      nodePrimary: new THREE.Color(0.45, 0.85, 0.9),
-      nodeSecondary: new THREE.Color(0.9, 0.75, 0.4),
-      lineColor: new THREE.Color(0.3, 0.6, 0.7),
-      ambient: 0.25,
-      pointLight: 0.6,
-    };
-  }, [theme]);
+  return SCENE_COLORS;
 }
 
 function useMouseRef() {

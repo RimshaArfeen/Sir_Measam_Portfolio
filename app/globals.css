@@ -17,8 +17,8 @@
   --color-border: rgba(255, 255, 255, 0.06);
   --color-border-strong: rgba(255, 255, 255, 0.12);
   --color-text: #fafaf9;
-  --color-text-muted: #a1a1aa;
-  --color-text-subtle: #71717a;
+  --color-text-muted: #d4d4d8;
+  --color-text-subtle: #a1a1aa;
   --color-accent: #c9a962;
   --color-accent-muted: rgba(201, 169, 98, 0.5);
   --color-accent-cyan: #7dd3c0;
@@ -92,6 +92,7 @@
 
 html {
   scroll-behavior: auto; /* Lenis controls smooth scroll; fallback for reduced-motion */
+overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -101,6 +102,8 @@ html {
 }
 
 body {
+  overflow-x: hidden;
+
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -112,23 +115,6 @@ body {
   transition:
     background-color 0.35s var(--ease-out-expo),
     color 0.35s var(--ease-out-expo);
-}
-
-/* Light theme — works with ThemeProvider data-theme="light" */
-[data-theme="light"] {
-  --color-bg: #fafaf9;
-  --color-bg-elevated: #f4f4f5;
-  --color-bg-overlay: #e4e4e7;
-  --color-surface: #f4f4f5;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-strong: rgba(0, 0, 0, 0.12);
-  --color-text: #18181b;
-  --color-text-muted: #52525b;
-  --color-text-subtle: #71717a;
-  --color-accent: #a68b4a;
-  --color-accent-muted: rgba(166, 139, 74, 0.5);
-  --color-accent-cyan: #0d9488;
-  --color-accent-cyan-muted: rgba(13, 148, 136, 0.4);
 }
 
 /* ==========================================================================
@@ -278,25 +264,24 @@ body {
   align-items: center;
   justify-content: center;
   padding-inline: var(--space-page-x);
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.97) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.03);
   transition:
     height var(--header-transition-duration) var(--header-transition-ease),
-    background-color var(--header-transition-duration) var(--header-transition-ease),
+    background var(--header-transition-duration) var(--header-transition-ease),
     backdrop-filter var(--header-transition-duration) var(--header-transition-ease),
     -webkit-backdrop-filter var(--header-transition-duration) var(--header-transition-ease);
 }
 
 .global-header--scrolled {
   height: var(--header-height-scrolled);
-  background: rgba(2, 6, 23, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-[data-theme="light"] .global-header--scrolled {
-  background: rgba(250, 250, 249, 0.4);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(2, 6, 23, 0.99) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 .global-header-inner {
@@ -335,13 +320,13 @@ body {
   }
 }
 
-/* Nav link — animated underline on hover */
+/* Nav link — animated underline on hover, high contrast for visibility */
 .header-nav-link {
   position: relative;
   font-size: var(--text-caption);
   font-weight: 500;
-  letter-spacing: 0.03em;
-  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   padding-block: 0.5rem;
   transition: color 0.25s var(--header-transition-ease);
@@ -349,7 +334,7 @@ body {
 
 .header-nav-link:hover,
 .header-nav-link:focus-visible {
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 .header-nav-link-inner {
@@ -462,46 +447,6 @@ body {
 
 .page-cta-secondary:hover {
   transform: translateY(-2px);
-}
-
-.header-theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  border-radius: 0.375rem;
-  transition:
-    color 0.2s var(--header-transition-ease),
-    background-color 0.2s var(--header-transition-ease);
-}
-
-.header-theme-toggle:hover,
-.header-theme-toggle:focus-visible {
-  color: var(--color-text);
-  background: color-mix(in srgb, var(--color-text) 0.08, transparent);
-}
-
-.header-theme-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.35s var(--header-transition-ease);
-}
-
-.header-theme-toggle:hover .header-theme-icon {
-  transform: rotate(12deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header-theme-toggle:hover .header-theme-icon {
-    transform: none;
-  }
 }
 
 /* Mobile trigger (hamburger) */
