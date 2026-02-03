@@ -1,101 +1,104 @@
+
 "use client";
 
-import { useRef, useEffect } from "react";
-import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLenis } from "@/providers";
+import React, { useRef, useEffect, useState } from "react";
+import {
+  BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare,
+  Lightbulb, User, MoveRight, CheckCircle2, Leaf, ShieldCheck,
+  Cpu, Star, Landmark, MapPin, Sparkles, Send
+} from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
+const CLOSING = "Partnerships, collaboration, and systems that scale responsibly. If that aligns with what you're building, let's connect.";
 
-const CLOSING =
-  "Partnerships, collaboration, and systems that scale responsibly. If that aligns with what you're building, let's connect.";
+// REUSABLE HOOK
+// REUSABLE HOOK
+type UseIOOptions = IntersectionObserverInit & {
+  once?: boolean;
+};
 
-export function HomeFinalCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (!lenis) return;
-    ScrollTrigger.scrollerProxy(document.documentElement, {
-      scrollTop: () => lenis.scroll,
-      getBoundingClientRect: () => ({ top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }),
-    });
-    const onScroll = () => ScrollTrigger.update();
-    lenis.on("scroll", onScroll);
-    ScrollTrigger.refresh();
-    return () => lenis.off("scroll", onScroll);
-  }, [lenis]);
+const useIntersectionObserver = <T extends HTMLElement>(
+  options: UseIOOptions = {}
+) => {
+  const ref = useRef<T | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const els = [contentRef.current, lineRef.current, headingRef.current, textRef.current, ctaRef.current].filter(Boolean);
-    if (reducedMotion) {
-      gsap.set(els, { opacity: 1, y: 0, scale: 1, scaleX: 1 });
-      return () => {};
-    }
-    gsap.set(contentRef.current, { opacity: 0, scale: 0.96 });
-    gsap.set(lineRef.current, { scaleX: 0, transformOrigin: "center center" });
-    gsap.set(headingRef.current, { opacity: 0, y: 28 });
-    gsap.set(textRef.current, { opacity: 0, y: 20 });
-    gsap.set(ctaRef.current, { opacity: 0, y: 16 });
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top 78%",
-        end: "top 15%",
-        onEnter: () => {
-          gsap.to(lineRef.current, { scaleX: 1, duration: 0.6, ease: "power3.out" });
-          gsap.to(contentRef.current, { opacity: 1, scale: 1, duration: 0.75, ease: "power3.out" });
-          gsap.to(headingRef.current, { opacity: 1, y: 0, duration: 0.7, delay: 0.12, ease: "back.out(1.1)" });
-          gsap.to(textRef.current, { opacity: 1, y: 0, duration: 0.6, delay: 0.25, ease: "power3.out" });
-          gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5, delay: 0.45, ease: "power2.out" });
-        },
-        onEnterBack: () => {
-          gsap.to(els, { opacity: 1, y: 0, scale: 1, scaleX: 1, duration: 0.4, stagger: 0.04, ease: "power2.out" });
-        },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if (options.once) observer.disconnect();
+      }
+    }, options);
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [options]);
+
+  return [ref, isVisible] as const;
+};
+
+
+
+
+/**
+ * HOME FINAL CTA SECTION
+ * A cinematic, high-impact conclusion to the scroll journey.
+ */
+const HomeFinalCTA = () => {
+  const [sectionRef, isVisible] = useIntersectionObserver({ threshold: 0.3, once: true });
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-center bg-transparent px-[var(--space-page-x)] py-[var(--space-page-y)] border-t border-[var(--color-border)] overflow-hidden"
-      aria-labelledby="final-cta-heading"
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 py-24 bg-black/40 overflow-hidden  border-white/10"
     >
-      <div ref={contentRef} className="max-w-xl mx-auto text-center">
-        <div ref={lineRef} className="h-0.5 w-20 mx-auto mb-6 bg-[var(--color-accent-cyan)]" style={{ transformOrigin: "center center" }} aria-hidden />
-        <h2
-          id="final-cta-heading"
-          ref={headingRef}
-          className="text-display font-bold text-[var(--color-text)] tracking-[var(--text-display-tracking)] mb-6"
-        >
-          Let&apos;s build together
-        </h2>
-        <p
-          ref={textRef}
-          className="text-body-lg text-[var(--color-text-muted)] leading-relaxed mb-10"
-        >
+      {/* Dynamic Background Elements */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[160px] rounded-full transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.03)_0%,transparent_70%)]" />
+
+      <div className="max-w-4xl mx-auto relative z-10 text-center">
+        {/* Animated Line Component */}
+        <div className="flex justify-center mb-12">
+          <div className={`h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-1000 ease-in-out ${isVisible ? 'w-32 opacity-100' : 'w-0 opacity-0'}`} />
+        </div>
+
+        <div className={`transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-6xl md:text-[7rem] font-black text-white tracking-tighter leading-none mb-10 selection:bg-blue-600">
+            Let’s build <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600 animate-gradient-x">
+              together.
+            </span>
+          </h2>
+        </div>
+
+        <p className={`text-xl md:text-3xl text-gray-400 font-light leading-relaxed mb-16 max-w-2xl mx-auto transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {CLOSING}
         </p>
-        <Link
-          ref={ctaRef}
-          href="/connect"
-          className="hero-cta-btn inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-hero-tags font-semibold tracking-widest uppercase hover:bg-white/20 hover:border-white/40 hover:scale-105 transition-all duration-300 ease-out group"
-        >
-          <span>Connect</span>
-          <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
+
+        <div className={`flex flex-col items-center gap-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <a
+            href="/connect"
+            className="group relative flex items-center gap-4 px-12 py-6 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+          >
+            <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <span className="relative z-10 text-lg uppercase tracking-[0.2em]">Start a Conversation</span>
+            <Send className="relative z-10 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </a>
+
+          <div className="flex items-center gap-6 opacity-40 hover:opacity-100 transition-opacity">
+            <div className="w-12 h-[1px] bg-white/30" />
+            <span className="text-xs font-mono uppercase tracking-[0.4em]">Global Connectivity</span>
+            <div className="w-12 h-[1px] bg-white/30" />
+          </div>
+        </div>
       </div>
+
+      {/* Subtle Bottom Glow */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
     </section>
   );
-}
+};
+
+export default HomeFinalCTA

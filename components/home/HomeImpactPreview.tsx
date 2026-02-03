@@ -71,7 +71,7 @@ const HomeImpactPreview = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 px-6 md:px-20 bg-black overflow-hidden border-t border-white/5"
+      className="relative py-32 px-6 md:px-20 bg-black/40  overflow-hidden border-t border-white/5"
     >
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
@@ -161,45 +161,4 @@ const HomeImpactPreview = () => {
   );
 };
 
-// ... Previous components (HomeAboutPreview, HomeGreynPreview, FocusAreas) would be here ...
-
-export default function App() {
-  const [heroRef, heroVisible] =
-    useIntersectionObserver<HTMLDivElement>({ threshold: 0.1, once: true });
-
-  return (
-    <div className="bg-zinc-950 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen relative">
-      <style>{`
-        @keyframes revealText {
-          from { clip-path: inset(100% 0 0 0); opacity: 0; transform: translateY(20px); }
-          to { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0); }
-        }
-        .animate-reveal { animation: revealText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-      `}</style>
-
-      {/* Hero */}
-      <div ref={heroRef} className="relative z-10 max-w-7xl mx-auto py-24 px-6 md:px-20 pt-36">
-        <p className="text-blue-500 font-mono tracking-[0.5em] uppercase text-sm mb-6">Research Portfolio</p>
-        <h1 className="text-6xl md:text-[9rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
-          {"Impact".split("").map((char, i) => (
-            <span key={i} className="inline-block opacity-0 animate-reveal" style={{ animationDelay: `${0.1 + i * 0.08}s` }}>{char}</span>
-          ))}
-          <span className="text-cyan-400 opacity-0 animate-reveal" style={{ animationDelay: "0.8s" }}>.</span>
-        </h1>
-        <div className="flex flex-col md:flex-row md:items-center gap-8">
-          <div className={`h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left transition-all duration-1000 ${heroVisible ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"}`} />
-          <p className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-500 ${heroVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}>
-            {IMPACT_INTRO}
-          </p>
-        </div>
-      </div>
-
-      <HomeImpactPreview />
-
-      {/* Footer Placeholder for visual completeness */}
-      <footer className="py-20 text-center border-t border-white/5 opacity-50">
-        <p className="text-xs tracking-[0.5em] uppercase">Built for Scale & Responsibility</p>
-      </footer>
-    </div>
-  );
-}
+export default HomeImpactPreview

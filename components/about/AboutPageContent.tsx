@@ -544,7 +544,7 @@ export default function App() {
         </section>
 
         {/* STATS STRIP */}
-        <section className="border-y border-white/5 bg-white/[0.02] backdrop-blur-md">
+        <section className=" w-full border-y border-white/5 bg-white/[0.02] backdrop-blur-md flex justify-around">
           <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
             {STATS.map((stat, i) => (
               <FadeIn key={i} delay={i * 100} direction="none">

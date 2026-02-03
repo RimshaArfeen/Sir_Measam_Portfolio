@@ -148,7 +148,7 @@ export default function App() {
     const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
   
   return (
-    <div className="bg-black text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden font-sans">
+    <div className="bg-black/40 text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden font-sans">
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');

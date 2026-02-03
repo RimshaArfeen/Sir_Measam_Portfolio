@@ -61,10 +61,10 @@ const HomeGreynPreview = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 px-6 md:px-20 bg-black overflow-hidden border-t border-white/5"
+      className="relative py-32 px-6 md:px-20 bg-blue/40 overflow-hidden border-t border-white/5"
     >
       {/* Structural Glows */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-cyan-900/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row gap-20 items-center">

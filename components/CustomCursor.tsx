@@ -81,7 +81,7 @@ export function CustomCursor() {
     >
       {/* Circular cursor with subtle glow */}
       <div
-        className="absolute inset-0 rounded-full bg-white/90 ring-2 ring-white/50"
+        className="absolute inset-0 rounded-full bg-cyan-500/70 ring-2 ring-white/50"
         style={{
           boxShadow: "0 0 12px rgba(255,255,255,0.5), 0 0 24px rgba(201,169,98,0.3)",
         }}

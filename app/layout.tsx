@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { LenisProvider, AnimationProvider } from "@/providers";
-import { NoiseOverlay, GlobalParticleBackground, PageTransition, GlobalHeader, GlobalFooter, CustomCursor } from "@/components";
+import { NoiseOverlay, GlobalParticleBackground, PageTransition , CustomCursor } from "@/components";
 import "./globals.css";
+import GlobalHeader from "@/components/GlobalHeader";
+import GlobalFooter from "@/components/GlobalFooter";
 
 const inter = Inter({
   variable: "--font-inter",

@@ -2,10 +2,13 @@
 import AnimatedBeamsBackground from "@/components/AnimatedBeamsBackground/AnimatedBeamsBackground";
 import HomeAboutPreview from "@/components/home/HomeAboutPreview";
 import HomeGreynPreview from "@/components/home/HomeGreynPreview";
+import HomeImpactPreview from "@/components/home/HomeImpactPreview";
+import HomeFinalCTA from "@/components/home/HomeFinalCTA";
+
 
 // --- MAIN PORTFOLIO COMPONENT ---
 const HERO_LINES = [
-  "Muhammad Measm Raza",
+  "Muhammad Mesam Raza",
   "Founder | Climate-Tech Entrepreneur | Global Impact Builder",
   "Building verified climate impact, scalable technology, and globally distributed companies from day one.",
   "Operating globally · Remote-first · Founder-led",
@@ -13,11 +16,11 @@ const HERO_LINES = [
 
 const App = () => {
   return (
-    <div className="relative min-h-screen text-slate-100 font-sans selection:bg-cyan-500/30">
+    <div className="relative min-h-screen text-slate-100 font-sans bg-black/20 selection:bg-cyan-500/30">
       <AnimatedBeamsBackground />
 
-      <main className="relative z-10 w-full mx-auto px-6 md:px-20 py-24 md:py-40">
-        <div className="max-w-4xl space-y-10">
+      <main className="relative z-10 w-full mx-auto px-6 md:px-20 py-24 md:py-48">
+        <div className=" w-full space-y-10 pb-24 px-20">
           {/* Badge using Electric Blue and Cyan */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/5 text-cyan-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -54,7 +57,7 @@ const App = () => {
           </div>
         </div>
 
-        <section className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <section className=" w-full mt-40 grid grid-cols-1 md:grid-cols-3 gap-10 pb-24  px-20">
           {[
             { title: 'Climate-Tech', desc: 'Leveraging technology to solve the most pressing environmental challenges.' },
             { title: 'Entrepreneurship', desc: 'Building and scaling companies with a global-first mindset.' },
@@ -71,6 +74,8 @@ const App = () => {
         </section>
          <HomeAboutPreview />
          <HomeGreynPreview />
+         <HomeImpactPreview />
+         <HomeFinalCTA/>
       </main>
     </div>
   );
