@@ -13,6 +13,7 @@ import {
   FileText
 } from 'lucide-react';
 import AnimatedBeamsBackground from '../AnimatedBeamsBackground/AnimatedBeamsBackground';
+import Link from 'next/link';
 
 /**
  * Greyn (A Project) Page Redesign
@@ -148,7 +149,7 @@ export default function App() {
     const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
   
   return (
-    <div className="bg-black/40 text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden font-sans">
+    <div className="bg-black/70 text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden font-sans">
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -180,7 +181,7 @@ export default function App() {
         {/* HERO SECTION */}
         <section
           ref={heroRef}
-          className="relative min-h-[100vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16 bg-black/40 text-white overflow-hidden"
+          className="relative min-h-[100vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16  text-white overflow-hidden"
         >
           {/* Background blur spots */}
           <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-cyan-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -192,7 +193,7 @@ export default function App() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 leading-[0.9] flex flex-wrap overflow-hidden">
+          <h1 className="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 leading-[0.9] flex flex-wrap overflow-hidden ">
             {"Greyn".split("").map((char, i) => (
               <span key={i} className="inline-block overflow-hidden">
                 <span
@@ -209,14 +210,17 @@ export default function App() {
             ))}
           </h1>
 
+<div className=' w-full flex'>
+            {/* Divider line */}
+            <div className={`h-[1px] w-48 bg-gradient-to-r from-cyan-400 to-transparent mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
 
           {/* Tagline */}
           <p className={`text-xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed font-light transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
             {HERO_TAGLINE}
           </p>
 
-          {/* Divider line */}
-          <div className={`h-[1px] w-48 bg-gradient-to-r from-cyan-400 to-transparent mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
+         
+</div>
         </section>
 
         {/* PILLARS / BENTO SECTION */}
@@ -303,15 +307,18 @@ export default function App() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
+                  <Link  href="/connect"
+                   className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
                     <Mail size={20} />
                     Get in touch
                     <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </button>
-                  <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                  </Link>
+                  <Link 
+                  href='/research'
+                  className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                     <FileText size={20} />
                     View Research
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

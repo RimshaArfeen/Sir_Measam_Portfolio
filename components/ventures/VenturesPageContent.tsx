@@ -533,7 +533,7 @@ export default function App() {
   const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
 
   return (
-    <div className="bg-black text-white min-h-screen selection:bg-cyan-500/30 font-sans">
+    <div className="bg-black/70 text-white h-full md:min-h-screen selection:bg-cyan-500/30 font-sans">
       <style>
         {`
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -549,7 +549,7 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-[85vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16 bg-black text-white">
+        <section ref={heroRef} className="relative min-h-[85vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16 text-white">
 
           {/* Background Glows */}
           <div className="fixed inset-0 pointer-events-none z-0">
@@ -716,7 +716,6 @@ export default function App() {
           </FadeIn>
         </section>
 
-        {/* Footer Accent */}
        
       </main>
     </div>

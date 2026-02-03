@@ -16,8 +16,8 @@ const CONTACT_LIST = [
   {
     id: "email",
     label: "Email",
-    href: "mailto:contact@muhammadmeasmraza.com",
-    value: "contact@muhammadmeasmraza.com",
+    href: "mailto:rimshaarfeen61@gmail.com",
+    value: "rimshaarfeen61@gmail.com",
     desc: "Primary for collaborations.",
     icon: <Mail className="w-5 h-5" />,
     color: "group-hover:text-blue-500"
@@ -60,37 +60,78 @@ function useScrollReveal() {
 
   return [ref, isVisible];
 }
+type LookingCardProps = {
+  item: {
+    title: string;
+    desc: string;
+  };
+  index: number;
+};
+
+function LookingCard({ item, index }: LookingCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setVisible(true),
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        transitionDelay: `${index * 100}ms`,
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+      }}
+      className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 transition-all duration-500"
+    >
+      <h4 className="text-xl font-bold mb-4">{item.title}</h4>
+      <p className="text-sm text-gray-500">{item.desc}</p>
+    </div>
+  );
+}
 
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // async function handleSubmit(e: any) {
-  //   e.preventDefault();
-  //   setLoading(true);
+  async function handleSubmit(e: any) {
+    e.preventDefault();
+    setLoading(true);
 
-  //   const formData = new FormData(e.target);
+    const formData = new FormData(e.target);
 
-  //   const res = await fetch("/api/contact", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       name: formData.get("name"),
-  //       email: formData.get("email"),
-  //       message: formData.get("message"),
-  //     }),
-  //   });
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        message: formData.get("message"),
+      }),
+    });
 
-  //   setLoading(false);
+    setLoading(false);
 
-  //   if (res.ok) {
-  //     alert("Message sent!");
-  //     e.target.reset();
-  //   } else {
-  //     alert("Error sending message");
-  //   }
-  // }
+    if (res.ok) {
+      alert("Message sent!");
+      e.target.reset();
+    } else {
+      alert("Error sending message");
+    }
+  }
   return (
-    <div className="bg-black text-white min-h-screen selection:bg-blue-500/30">
+    <div className="bg-black/70 text-white min-h-screen selection:bg-blue-500/30">
       {/* Abstract Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full" />
@@ -176,7 +217,7 @@ export default function App() {
               <div className="relative">
                 <div className="p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/30 border border-white/5 backdrop-blur-sm">
                   <form 
-                  // onSubmit={handleSubmit} 
+                  onSubmit={handleSubmit} 
                   className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
@@ -283,35 +324,3 @@ export default function App() {
   );
 }
 
-type LookingCardProps = {
-  item: {
-    title: string;
-    desc: string;
-  };
-  index: number;
-};
-
-function LookingCard({ item, index }: LookingCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        transitionDelay: `${index * 100}ms`,
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(20px)'
-      }}
-      className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full group"
-    >
-      <h4 className="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">{item.title}</h4>
-      <p className="text-sm text-gray-500 leading-relaxed font-light">
-        {item.desc}
-      </p>
-      <div className="mt-auto pt-8">
-        <div className="h-[2px] w-8 bg-zinc-800 group-hover:w-full group-hover:bg-cyan-500 transition-all duration-500" />
-      </div>
-    </div>
-  );
-}

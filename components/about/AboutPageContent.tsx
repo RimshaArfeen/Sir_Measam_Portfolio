@@ -645,7 +645,7 @@ export default function App() {
                 {/* Secondary CTA */}
                 <div className="mt-8 p-8 rounded-3xl border border-dashed border-white/10 flex items-center justify-between group hover:border-blue-500/50 transition-colors cursor-pointer">
                   <span className="text-gray-500 text-sm font-medium uppercase tracking-widest">Global Operations</span>
-                  <Link href="/contact" className="flex items-center gap-2 text-white font-semibold group-hover:text-cyan-400 transition-colors">
+                  <Link href="/connect" className="flex items-center gap-2 text-white font-semibold group-hover:text-cyan-400 transition-colors">
                     Contact
                     <ArrowUpRight size={18} />
                   </Link>

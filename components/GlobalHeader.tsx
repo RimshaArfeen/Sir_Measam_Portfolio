@@ -5,13 +5,13 @@ import logo from "@/public/logo.png"
 import Image from "next/image";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Greyn", href: "#greyn" },
-  { label: "Ventures", href: "#ventures" },
-  { label: "Research", href: "#research" },
-  { label: "Impact", href: "#impact" },
-  { label: "Connect", href: "#connect" },
+  { label: "Home", href: "/home" },
+  { label: "About", href: "/about" },
+  { label: "Greyn", href: "/greyn" },
+  { label: "Ventures", href: "/ventures" },
+  { label: "Research", href: "/research" },
+  { label: "Impact", href: "/impact" },
+  { label: "Connect", href: "/connect" },
 ] as const;
 
 const SCROLL_THRESHOLD = 20;
@@ -25,7 +25,7 @@ function NavLink({ label, href }: { label: string; href: string }) {
     <a
       href={href}
       className="relative group px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors cursor-pointer"
-      onClick={(e) => e.preventDefault()}
+      // onClick={(e) => e.preventDefault()}
     >
       <span className="relative z-10">{label}</span>
       {/* Animated Underline Hook */}

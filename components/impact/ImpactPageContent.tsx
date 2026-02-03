@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { Award, Globe, Users, Star, ExternalLink, ShieldCheck, MessageCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const HERO_TAGLINE = "Global Recognition & Service — proof of responsibility.";
 
@@ -83,7 +84,7 @@ export default function App() {
   const [heroRef, heroVisible] = useIntersectionObserver({ threshold: 0.1, once: true });
 
   return (
-    <div className="bg-black text-white font-sans selection:bg-blue-500/30 min-h-screen overflow-x-hidden">
+    <div className="bg-black+70 text-white font-sans selection:bg-blue-500/30 min-h-screen overflow-x-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes revealText {
@@ -184,7 +185,7 @@ export default function App() {
               >
                 <h4 className="text-xl font-bold mb-4 group-hover:translate-x-1 transition-transform">{program.title}</h4>
                 <p className="text-xs text-gray-500 leading-relaxed">{program.desc}</p>
-                <ExternalLink className="w-4 h-4 mt-6 text-gray-700 group-hover:text-cyan-500 transition-colors" />
+               
               </div>
             ))}
           </div>
@@ -230,30 +231,22 @@ export default function App() {
             </p>
 
             <div className="relative z-10 flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center justify-center gap-3 group">
+              <Link
+                href="/connect"
+                 className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center justify-center gap-3 group">
                 Get in touch <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </button>
-              <button className="px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all flex items-center justify-center gap-3 group">
+              </Link>
+              <Link 
+              href="/research"
+              className="px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all flex items-center justify-center gap-3 group">
                 View Research <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 border-t border-white/5 px-6 md:px-24 text-center md:text-left">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-          <div className="text-[10px] font-mono tracking-widest uppercase">
-            EST. 2024 / Global Impact Initiative
-          </div>
-          <div className="flex gap-8 text-[10px] font-mono tracking-widest uppercase">
-            {["Service", "Policy", "Ventures"].map(link => (
-              <a key={link} href="#" className="hover:text-cyan-400 transition-colors">{link}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+    
     </div>
   );
 }
