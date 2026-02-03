@@ -1,6 +1,7 @@
 "use client" 
 import AnimatedBeamsBackground from "@/components/AnimatedBeamsBackground/AnimatedBeamsBackground";
-
+import HomeAboutPreview from "@/components/home/HomeAboutPreview";
+import HomeGreynPreview from "@/components/home/HomeGreynPreview";
 
 // --- MAIN PORTFOLIO COMPONENT ---
 const HERO_LINES = [
@@ -68,6 +69,8 @@ const App = () => {
             </div>
           ))}
         </section>
+         <HomeAboutPreview />
+         <HomeGreynPreview />
       </main>
     </div>
   );

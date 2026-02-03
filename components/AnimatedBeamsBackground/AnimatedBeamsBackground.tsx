@@ -171,13 +171,13 @@ const AnimatedBeamsBackground = () => {
                     className="absolute inset-0 w-full h-full cursor-crosshair"
                     style={{ filter: 'blur(0.4px) drop-shadow(0 0 12px rgba(34, 211, 238, 0.3))' }}
                />
-               <div
+               {/* <div
                     className="absolute inset-0 opacity-[0.03] pointer-events-none"
                     style={{
                          backgroundImage: `linear-gradient(#22d3ee 1px, transparent 1px), linear-gradient(90deg, #22d3ee 1px, transparent 1px)`,
                          backgroundSize: '80px 80px',
                     }}
-               />
+               /> */}
                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_90%)] pointer-events-none" />
           </div>
      );

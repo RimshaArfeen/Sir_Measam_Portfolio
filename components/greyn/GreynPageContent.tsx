@@ -13,7 +13,7 @@ import {
   FileText
 } from 'lucide-react';
 import AnimatedBeamsBackground from '../AnimatedBeamsBackground/AnimatedBeamsBackground';
-import { useIntersectionObserver } from '../research/ResearchPageContent';
+
 /**
  * Greyn (A Project) Page Redesign
  * Role: Senior UI/UX Designer & Developer
@@ -63,6 +63,38 @@ interface FadeInProps {
   direction?: "up" | "down" | "left" | "right" | "none";
   className?: string;
 }
+
+// REUSABLE HOOK
+type UseIOOptions = IntersectionObserverInit & {
+  once?: boolean;
+};
+
+const useIntersectionObserver = <T extends HTMLElement>(
+  options: UseIOOptions = {}
+) => {
+  const ref = useRef<T | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if (options.once) observer.disconnect();
+      }
+    }, options);
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [options]);
+
+  return [ref, isVisible] as const;
+};
+
+
+
+
 
 const FadeIn: React.FC<FadeInProps> = ({
   children,

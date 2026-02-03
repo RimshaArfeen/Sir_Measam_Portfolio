@@ -3,11 +3,35 @@
 import React, { useRef, useEffect, useState } from "react";
 import { BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare, Lightbulb } from "lucide-react";
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
-import { PUBLICATIONS, BOOK } from "./researchData";
 
+// DATA SECTION (Fixed/Integrated)
 const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
 
-export const FOCUS_AREAS = [
+const PUBLICATIONS = [
+  {
+    tag: "Journal Article",
+    title: "SME Digital Resilience",
+    body: "An empirical study on how digital transformation frameworks enable small enterprises to navigate global supply chain disruptions.",
+  },
+  {
+    tag: "White Paper",
+    title: "The ESG Verification Gap",
+    body: "Analyzing the trust deficit in sustainability reporting and the role of decentralized verification ecosystems.",
+  },
+  {
+    tag: "Case Study",
+    title: "Emerging Tech Adoption",
+    body: "Frameworks for integrating AI and automation in traditional manufacturing sectors across Southeast Asia.",
+  }
+];
+
+const BOOK = {
+  title: "The Young Capitalist",
+  tagline: "A manifesto for the next generation of value creators and impact-driven entrepreneurs.",
+  launch: "Coming Spring 2025"
+};
+
+const FOCUS_AREAS = [
   {
     title: "Digital transformation of SMEs",
     desc: "How small and medium enterprises adopt technology, scale digitally, and compete in global markets.",
@@ -25,28 +49,44 @@ export const FOCUS_AREAS = [
   },
 ];
 
-const FocusAreas = () => {
-  const refs = useRef<HTMLDivElement[]>([]);
+// REUSABLE HOOK
+type UseIOOptions = IntersectionObserverInit & {
+  once?: boolean;
+};
+
+const useIntersectionObserver = <T extends HTMLElement>(
+  options: UseIOOptions = {}
+) => {
+  const ref = useRef<T | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("opacity-100", "translate-y-0");
-        });
-      },
-      { threshold: 0.1 }
-    );
+    if (!ref.current) return;
 
-    refs.current.forEach((el) => el && observer.observe(el));
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if (options.once) observer.disconnect();
+      }
+    }, options);
 
-    return () => refs.current.forEach((el) => el && observer.unobserve(el));
-  }, []);
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [options]);
+
+  return [ref, isVisible] as const;
+};
+
+
+
+
+const FocusAreas = () => {
+  const [containerRef, isVisible] = useIntersectionObserver({ threshold: 0.1, once: true });
 
   return (
-    <section className="relative z-10">
+    <section ref={containerRef} className="relative z-10">
       <div className="max-w-7xl mx-auto">
-        <div className="section-header mb-16">
+        <div className="mb-16">
           <h2 className="text-blue-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">
             Core Specialization
           </h2>
@@ -59,20 +99,19 @@ const FocusAreas = () => {
           {FOCUS_AREAS.map((area, i) => (
             <div
               key={i}
-              ref={(el) => {
-                if (el && !refs.current.includes(el)) refs.current.push(el);
-              }}
-              className="group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-500 overflow-hidden shadow-lg shadow-cyan-500/20 opacity-0 translate-y-10"
+              style={{ transitionDelay: `${i * 150}ms` }}
+              className={`group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-700 overflow-hidden shadow-lg shadow-cyan-500/10 
+                ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="mb-6 p-3 rounded-lg bg-black/50 w-fit border border-cyan-400/20 group-hover:scale-110 transition-transform">
                 {area.icon}
               </div>
               <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
                 {area.title}
               </h4>
-              <p className="text-gray-200 leading-relaxed text-lg">{area.desc}</p>
-              <div className="mt-8 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm text-cyan-400 font-medium">
+              <p className="text-gray-400 leading-relaxed text-lg group-hover:text-gray-200 transition-colors">{area.desc}</p>
+              <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all flex items-center text-sm text-cyan-400 font-medium translate-y-2 group-hover:translate-y-0">
                 Deep Dive <ArrowUpRight className="ml-1 w-4 h-4" />
               </div>
             </div>
@@ -83,74 +122,52 @@ const FocusAreas = () => {
   );
 };
 
-
-export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
-  options: IntersectionObserverInit & { once?: boolean } = {}
-) {
-  const elementRef = useRef<T>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        if ((options as any).once) observer.unobserve(entry.target);
-      }
-    }, options);
-
-    const current = elementRef.current;
-    if (current) observer.observe(current);
-
-    return () => {
-      if (current) observer.unobserve(current);
-    };
-  }, [options]);
-
-  return [elementRef, isVisible] as const;
-}
-
 export default function App() {
-  const containerRef = useRef(null);
-  const [heroRef, heroVisible] = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    once: true,
-  });
+  const [heroRef, heroVisible] =
+    useIntersectionObserver<HTMLDivElement>({ threshold: 0.1, once: true });
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-black/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen"
-    >
-      {/* Background */}
+    <div className="bg-zinc-950/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen relative px-10 lg:px-24 py-24">
+      {/* Styles for the text animation */}
+      <style>{`
+        @keyframes revealText {
+          from { clip-path: inset(100% 0 0 0); opacity: 0; transform: translateY(20px); }
+          to { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal {
+          animation: revealText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}</style>
+
+      {/* Background Decor */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-900/10 blur-[120px] rounded-full" />
         <AnimatedBeamsBackground />
       </div>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div
         ref={heroRef}
-        className={`relative z-10 max-w-7xl py-24 px-20 pt-36 transition-all duration-1000 ${heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+        className="relative z-10 max-w-7xl mx-auto py-24  pt-36"
       >
-        <p className="text-blue-500 font-mono tracking-[0.5em] uppercase text-sm mb-6 transform transition-all duration-1000">
+        <p className="text-blue-500 font-mono tracking-[0.5em] uppercase text-sm mb-6">
           Research Portfolio
         </p>
 
-        <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
+        <h1 className="text-6xl md:text-[9rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
           {"Research".split("").map((char, i) => (
             <span
               key={i}
-              className="inline-block overflow-hidden opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+              className="inline-block opacity-0 animate-reveal"
               style={{ animationDelay: `${0.1 + i * 0.08}s` }}
             >
               {char}
             </span>
           ))}
           <span
-            className="text-cyan-400 opacity-0 animate-[revealText_1.2s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            style={{ animationDelay: "0.6s" }}
+            className="text-cyan-400 opacity-0 animate-reveal"
+            style={{ animationDelay: "0.8s" }}
           >
             .
           </span>
@@ -170,31 +187,30 @@ export default function App() {
         </div>
       </div>
 
-      {/* Focus Areas */}
-      <section className="px-6 md:px-20 py-24 relative z-10">
+      {/* Focus Areas Section */}
+      <section className=" py-24 relative z-10">
         <FocusAreas />
       </section>
 
-
-      {/* Publications */}
-      <section className="px-6 md:px-20 py-24 bg-zinc-950/50">
-        <div className="max-w-5xl mx-auto pub-container">
-          <div className="section-header mb-16">
+      {/* Publications Section */}
+      <section className=" py-24 bg-zinc-900/40 relative z-10 border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-16">
             <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">Scholarly Impact</h2>
             <h3 className="text-4xl md:text-5xl font-semibold text-white">Publications</h3>
           </div>
 
-          <div className="space-y-0">
+          <div className="divide-y divide-white/10">
             {PUBLICATIONS.map((pub, i) => (
               <div
                 key={i}
-                className="pub-row group flex flex-col md:flex-row gap-8 py-12 border-b border-white/10 hover:bg-white/[0.02] transition-colors px-4 rounded-lg"
+                className="group flex flex-col md:flex-row gap-8 py-12 hover:bg-white/[0.03] transition-colors px-4 rounded-lg"
               >
                 <div className="md:w-1/3">
                   <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-4 tracking-wider">
                     {pub.tag}
                   </span>
-                  <h4 className="text-3xl font-bold text-white group-hover:translate-x-2 transition-transform duration-300">
+                  <h4 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                     {pub.title}
                   </h4>
                 </div>
@@ -202,8 +218,8 @@ export default function App() {
                   <p className="text-xl text-gray-400 leading-relaxed font-light">
                     {pub.body}
                   </p>
-                  <button className="mt-6 flex items-center text-white/50 hover:text-cyan-400 transition-colors">
-                    <BookOpen className="w-5 h-5 mr-2" />
+                  <button className="mt-6 flex items-center text-white/50 hover:text-cyan-400 transition-colors group/btn">
+                    <BookOpen className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform" />
                     <span className="text-sm font-medium">Request Full Text</span>
                   </button>
                 </div>
@@ -214,22 +230,21 @@ export default function App() {
       </section>
 
       {/* Upcoming Book Section */}
-      <section className="px-6 md:px-20 py-32 overflow-hidden">
+      <section className=" py-32 relative z-10 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="relative p-12 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
-            {/* Animated Glow */}
-            <div className="book-glow absolute -top-24 -right-24 w-96 h-96 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none" />
+          <div className="relative p-8 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-16">
               <div className="md:w-1/2">
                 <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-6">Literary Debut</h2>
-                <h3 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+                <h3 className="text-5xl md:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
                   {BOOK.title}
                 </h3>
                 <p className="text-2xl text-gray-300 font-light mb-8 leading-relaxed">
                   {BOOK.tagline}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-6">
                   <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all shadow-lg shadow-blue-900/20 active:scale-95">
                     Pre-order Interest
                   </button>
@@ -239,12 +254,11 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Visual Metaphor for Book */}
               <div className="md:w-1/2 flex justify-center">
-                <div className="relative w-64 h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-12 hover:rotate-0 transition-transform duration-700">
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+                <div className="relative w-64 h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-6 hover:rotate-0 transition-transform duration-700 group cursor-pointer">
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6 border-r-4 border-blue-500/50">
-                    <Award className="text-cyan-400 w-10 h-10 mb-4" />
+                    <Award className="text-cyan-400 w-10 h-10 mb-4 group-hover:scale-110 transition-transform" />
                     <div className="h-1 w-12 bg-white/20 mb-4" />
                     <span className="text-white font-black text-xl leading-tight uppercase tracking-tight">THE YOUNG CAPITALIST</span>
                   </div>
@@ -256,7 +270,7 @@ export default function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 md:px-20 py-32 bg-black border-t border-white/5 text-center">
+      <section className=" py-32 bg-black/80 relative z-10 border-t border-white/5 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
             Research = depth + credibility
@@ -276,10 +290,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer */}
-      <div className="py-10 text-center border-t border-white/5 text-xs tracking-widest text-gray-600 uppercase">
-        © 2024 Intellectual Property & Ventures
-      </div>
+     
     </div>
   );
 }
