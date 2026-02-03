@@ -164,7 +164,8 @@ const HomeImpactPreview = () => {
 // ... Previous components (HomeAboutPreview, HomeGreynPreview, FocusAreas) would be here ...
 
 export default function App() {
-  const [heroRef, heroVisible] = useIntersectionObserver({ threshold: 0.1, once: true });
+  const [heroRef, heroVisible] =
+    useIntersectionObserver<HTMLDivElement>({ threshold: 0.1, once: true });
 
   return (
     <div className="bg-zinc-950 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen relative">
