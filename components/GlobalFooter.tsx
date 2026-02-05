@@ -53,7 +53,7 @@ const Icon = ({ name, className = "w-4 h-4" }: { name: string; className?: strin
 
 const GlobalFooter = () => {
   return (
-    <footer className="relative z-[2] bg-black text-white border-t border-white/5 overflow-hidden">
+    <footer className="relative z-10 bg-black text-white border-t border-white/5 overflow-hidden">
       {/* Animated Accent Line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
 
@@ -91,8 +91,15 @@ const GlobalFooter = () => {
             </h3>
             <ul className="flex flex-col gap-4">
               {QUICK_LINKS.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="group flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors">
+                <li key={link.label} className="relative z-10">
+                  <a
+                    href={link.href}
+                    className="group flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer touch-manipulation"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = link.href;
+                    }}
+                  >
                     <Icon name={link.icon} className="w-4 h-4 text-gray-600 group-hover:text-cyan-400 transition-colors" />
                     <span className="relative">
                       {link.label}

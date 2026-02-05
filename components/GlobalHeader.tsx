@@ -59,8 +59,8 @@ const GlobalHeader = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled
-          ? "py-3 bg-black/80 backdrop-blur-md border-b border-white/5 shadow-2xl"
-          : "py-4 bg-cyan-800/10 border-b border-cyan-400/50"
+          ? "py-3 bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-2xl"
+          : "py-4 bg-cyan-800/10 backdrop-blur-sm border-b border-cyan-400/50"
         }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
