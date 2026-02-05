@@ -109,15 +109,22 @@ const GlobalHeader = () => {
       </div>
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-[105] transition-transform duration-500 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 min-h-screen w-full bg-black/95 backdrop-blur-2xl z-[105] transition-all duration-500 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
           }`}
+        style={{
+          backdropFilter: mobileOpen ? 'blur(24px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: mobileOpen ? 'blur(24px) saturate(180%)' : 'none'
+        }}
       >
+        {/* Solid overlay for better visibility */}
+        <div className="absolute inset-0 bg-black/90" />
+
         {/* Background Decorative Gradients */}
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-blue-600/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-400/10 blur-[120px] rounded-full" />
 
         {/* Mobile Nav */}
-        <nav className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center overflow-y-auto ">
+        <nav className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center overflow-y-auto">
           {NAV_ITEMS.map((item, idx) => (
             <a
               key={item.label}
