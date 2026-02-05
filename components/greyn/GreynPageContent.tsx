@@ -193,7 +193,7 @@ export default function App() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 leading-[0.9] flex flex-wrap overflow-hidden ">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter mb-8 leading-[0.9] flex flex-wrap overflow-hidden">
             {"Greyn".split("").map((char, i) => (
               <span key={i} className="inline-block overflow-hidden">
                 <span
@@ -210,26 +210,24 @@ export default function App() {
             ))}
           </h1>
 
-          <div className='w-full flex'>
+          <div className='w-full flex flex-col md:flex-row gap-4 md:gap-0'>
             {/* Divider line */}
-            <div className={`h-[1px] w-48 bg-gradient-to-r from-cyan-400 to-transparent mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
+            <div className={`h-[1px] w-32 md:w-48 bg-gradient-to-r from-cyan-400 to-transparent md:mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
 
             {/* Tagline */}
-            <p className={`text-xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed font-light transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+            <p className={`text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-400 max-w-3xl leading-relaxed font-light transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
               {HERO_TAGLINE}
             </p>
-
-
           </div>
         </section>
 
         {/* PILLARS / BENTO SECTION */}
         <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-4 md:gap-6">
             <FadeIn direction="left">
               <div>
-                <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-2">01 // Foundations</p>
-                <h2 className="text-3xl md:text-5xl font-bold">What we stand for</h2>
+                <p className="text-cyan-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2">01 // Foundations</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">What we stand for</h2>
               </div>
             </FadeIn>
             <FadeIn direction="right" delay={200}>
@@ -237,17 +235,17 @@ export default function App() {
             </FadeIn>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {PILLARS.map((pillar, i) => (
               <FadeIn key={i} delay={i * 150} direction="up">
-                <div className="group relative p-8 h-full rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-cyan-500/30 transition-all duration-500">
-                  <div className="mb-12 p-3 w-fit rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/20 transition-all duration-500">
+                <div className="group relative p-6 sm:p-8 h-full rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-cyan-500/30 transition-all duration-500">
+                  <div className="mb-8 sm:mb-12 p-3 w-fit rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/20 transition-all duration-500">
                     {pillar.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 group-hover:text-cyan-400 transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg">
                     {pillar.desc}
                   </p>
 
@@ -266,24 +264,24 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-5 lg:sticky lg:top-32">
               <FadeIn direction="left">
-                <p className="text-blue-500 font-mono text-sm tracking-widest uppercase mb-2">02 // Methodology</p>
-                <h2 className="text-3xl md:text-5xl font-bold mb-6">Core Features</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
+                <p className="text-blue-500 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2">02 // Methodology</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Core Features</h2>
+                <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
                   Greyn is architected to eliminate friction in verification and deployment, ensuring that global impact is as measurable as it is scalable.
                 </p>
               </FadeIn>
             </div>
 
-            <div className="lg:col-span-7 space-y-4">
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
               {FEATURES.map((feature, i) => (
                 <FadeIn key={i} delay={i * 100} direction="right">
-                  <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.05] hover:bg-white/[0.03] transition-all duration-300 flex gap-6 items-start group">
-                    <div className="mt-1 text-cyan-400 group-hover:scale-125 transition-transform duration-300">
-                      <CheckCircle2 size={24} />
+                  <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/5 bg-white/[0.05] hover:bg-white/[0.03] transition-all duration-300 flex gap-4 sm:gap-6 items-start group">
+                    <div className="mt-1 text-cyan-400 group-hover:scale-125 transition-transform duration-300 flex-shrink-0">
+                      <CheckCircle2 size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2 group-hover:text-white transition-colors">{feature.title}</h4>
-                      <p className="text-gray-400 text-lg leading-relaxed">{feature.body}</p>
+                      <h4 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-white transition-colors">{feature.title}</h4>
+                      <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">{feature.body}</p>
                     </div>
                   </div>
                 </FadeIn>
@@ -293,30 +291,30 @@ export default function App() {
         </section>
 
         {/* CTA SECTION */}
-        <section className="py-32 px-6">
+        <section className="py-20 sm:py-32 px-4 sm:px-6">
           <FadeIn direction="up">
-            <div className="max-w-5xl mx-auto relative rounded-[3rem] overflow-hidden bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border border-white/10 p-12 md:p-24 text-center">
+            <div className="max-w-5xl mx-auto relative rounded-2xl sm:rounded-[3rem] overflow-hidden bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border border-white/10 p-8 sm:p-12 md:p-20 lg:p-24 text-center">
               <div className="absolute inset-0 bg-grid-white opacity-10" />
 
               <div className="relative z-10">
-                <h2 className="text-4xl md:text-7xl font-extrabold mb-8 tracking-tighter">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 sm:mb-8 tracking-tighter leading-tight">
                   Built for impact at scale.
                 </h2>
-                <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed">
                   Greyn powers ventures across climate-tech, platforms, and digital infrastructure — execution-first, globally.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                   <Link href="/connect"
-                    className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
-                    <Mail size={20} />
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-black rounded-full font-bold text-base sm:text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
+                    <Mail size={18} className="sm:w-5 sm:h-5" />
                     Get in touch
-                    <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <ArrowUpRight size={16} className="sm:w-[18px] sm:h-[18px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Link>
                   <Link
                     href='/research'
-                    className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-                    <FileText size={20} />
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                    <FileText size={18} className="sm:w-5 sm:h-5" />
                     View Research
                   </Link>
                 </div>
