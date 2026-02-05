@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare, Lightbulb } from "lucide-react";
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
-
+import Link from "next/link";
 // DATA SECTION (Fixed/Integrated)
 const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
 
@@ -28,7 +28,7 @@ const PUBLICATIONS = [
 const BOOK = {
   title: "The Young Capitalist",
   tagline: "A manifesto for the next generation of value creators and impact-driven entrepreneurs.",
-  launch: "Coming Spring 2025"
+  launch: "Coming Spring 2026"
 };
 
 const FOCUS_AREAS = [
@@ -100,7 +100,7 @@ const FocusAreas = () => {
             <div
               key={i}
               style={{ transitionDelay: `${i * 150}ms` }}
-              className={`group relative p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-700 overflow-hidden shadow-lg shadow-cyan-500/10 
+              className={`group relative p-5 md:p-10 rounded-2xl bg-zinc-900/70 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-700 overflow-hidden shadow-lg shadow-cyan-500/10 
                 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -127,7 +127,7 @@ export default function App() {
     useIntersectionObserver<HTMLDivElement>({ threshold: 0.1, once: true });
 
   return (
-    <div className="bg-zinc-950/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen relative px-10 lg:px-24 py-24">
+    <div className="bg-zinc-950/40 text-gray-300 font-sans selection:bg-cyan-500/30 min-h-screen relative px-6 md:px-10 lg:px-24 py-24">
       {/* Styles for the text animation */}
       <style>{`
         @keyframes revealText {
@@ -155,7 +155,7 @@ export default function App() {
           Research Portfolio
         </p>
 
-        <h1 className="text-6xl md:text-[9rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
+        <h1 className=" text-5xl  md:text-7xl lg:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
           {"Research".split("").map((char, i) => (
             <span
               key={i}
@@ -165,12 +165,7 @@ export default function App() {
               {char}
             </span>
           ))}
-          <span
-            className="text-cyan-400 opacity-0 animate-reveal"
-            style={{ animationDelay: "0.8s" }}
-          >
-            .
-          </span>
+        
         </h1>
 
         <div className="flex flex-col md:flex-row md:items-center gap-8">
@@ -193,35 +188,35 @@ export default function App() {
       </section>
 
       {/* Publications Section */}
-      <section className=" py-24 bg-zinc-900/40 relative z-10 border-y border-white/5">
+      <section className=" px-6 lg:px-10 py-24 bg-zinc-900/40 relative z-10 border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div className="mb-16">
             <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">Scholarly Impact</h2>
-            <h3 className="text-4xl md:text-5xl font-semibold text-white">Publications</h3>
+            <h3 className="text-2xl md:text-6xl font-semibold text-white">Publications</h3>
           </div>
 
           <div className="divide-y divide-white/10">
             {PUBLICATIONS.map((pub, i) => (
               <div
                 key={i}
-                className="group flex flex-col md:flex-row gap-8 py-12 hover:bg-white/[0.03] transition-colors px-4 rounded-lg"
+                className="group flex flex-col md:flex-row gap-8 py-12 hover:bg-white/[0.03] transition-colors md:px-4 rounded-lg"
               >
                 <div className="md:w-1/3">
                   <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-4 tracking-wider">
                     {pub.tag}
                   </span>
-                  <h4 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
+                  <h4 className=" text-xl md:text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                     {pub.title}
                   </h4>
                 </div>
                 <div className="md:w-2/3">
-                  <p className="text-xl text-gray-400 leading-relaxed font-light">
+                  <p className=" text-sm md:text-xl text-gray-400 leading-relaxed font-light">
                     {pub.body}
                   </p>
-                  <button className="mt-6 flex items-center text-white/50 hover:text-cyan-400 transition-colors group/btn">
+                  {/* <button className="mt-6 flex items-center text-white/50 hover:text-cyan-400 transition-colors group/btn">
                     <BookOpen className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform" />
                     <span className="text-sm font-medium">Request Full Text</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}
@@ -232,35 +227,35 @@ export default function App() {
       {/* Upcoming Book Section */}
       <section className=" py-32 relative z-10 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="relative p-8 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
+          <div className="relative p-6 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-16">
               <div className="md:w-1/2">
-                <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-6">Literary Debut</h2>
-                <h3 className="text-5xl md:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
+                <h2 className="text-cyan-400 text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-6">Literary Debut</h2>
+                <h3 className="text-2xl md:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
                   {BOOK.title}
                 </h3>
-                <p className="text-2xl text-gray-300 font-light mb-8 leading-relaxed">
+                <p className="text-lg md:text-2xl text-gray-300 font-light mb-8 leading-relaxed">
                   {BOOK.tagline}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-6">
-                  <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all shadow-lg shadow-blue-900/20 active:scale-95">
+                <div className=" text-sm flex flex-col sm:flex-row gap-6">
+                  <Link href="/connect" className=" px-4 md:px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all shadow-lg shadow-blue-900/20 active:scale-95">
                     Pre-order Interest
-                  </button>
-                  <div className="flex items-center text-gray-500 px-4 text-sm font-medium border-l border-white/10">
+                  </Link>
+                  <div className="flex items-center text-center text-gray-500 md:px-4 text-sm font-medium md:border-l border-white/10">
                     {BOOK.launch}
                   </div>
                 </div>
               </div>
 
-              <div className="md:w-1/2 flex justify-center">
-                <div className="relative w-64 h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-6 hover:rotate-0 transition-transform duration-700 group cursor-pointer">
+              <div className=" md:w-1/2 flex justify-center">
+                <div className="relative w-32 sm:w-64 h-48 sm:h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-6 hover:rotate-0 transition-transform duration-700 group cursor-pointer">
                   <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 border-r-4 border-blue-500/50">
+                  <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-6 border-r-4 border-blue-500/50">
                     <Award className="text-cyan-400 w-10 h-10 mb-4 group-hover:scale-110 transition-transform" />
                     <div className="h-1 w-12 bg-white/20 mb-4" />
-                    <span className="text-white font-black text-xl leading-tight uppercase tracking-tight">THE YOUNG CAPITALIST</span>
+                    <span className="text-white font-black  text-sm md:text-xl leading-tight uppercase tracking-tight">THE YOUNG CAPITALIST</span>
                   </div>
                 </div>
               </div>
@@ -272,20 +267,20 @@ export default function App() {
       {/* CTA Section */}
       <section className=" py-32 bg-black/80 relative z-10 border-t border-white/5 text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+          <h2 className="text-xl md:text-6xl font-bold text-white mb-8 tracking-tight">
             Research = depth + credibility
           </h2>
-          <p className="text-xl text-gray-400 mb-12 font-light leading-relaxed">
+          <p className="text-xs text-gray-400 mb-12 font-light leading-relaxed">
             Academic and thought leadership built on published work, ongoing research, and a commitment to rigor and impact.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <button className="group px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center">
+            <Link  href="/connect" className=" text-sm md:text-lg group px-5 md:px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center">
               Get in touch
               <MessageSquare className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all">
+            </Link>
+            <Link href="/impact" className=" text-sm md:text-lg  px-5 md:px-10 py-5 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all">
               View Impact
-            </button>
+            </Link>
           </div>
         </div>
       </section>

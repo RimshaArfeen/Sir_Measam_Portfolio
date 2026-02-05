@@ -133,8 +133,8 @@ const FadeIn: React.FC<FadeInProps> = ({
     <div
       ref={ref}
       className={`transition-all duration-1000 ease-out ${className} ${isVisible
-          ? "opacity-100 translate-y-0 translate-x-0"
-          : `opacity-0 ${directions[direction]}`
+        ? "opacity-100 translate-y-0 translate-x-0"
+        : `opacity-0 ${directions[direction]}`
         }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -146,10 +146,10 @@ const FadeIn: React.FC<FadeInProps> = ({
 
 
 export default function App() {
-    const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
-  
+  const [heroRef, heroVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1, once: true });
+
   return (
-    <div className="bg-black/70 text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden font-sans">
+    <div className="bg-black/70 text-white min-h-screen h-full selection:bg-cyan-500/30 overflow-x-hidden ">
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -177,11 +177,11 @@ export default function App() {
         {/* <div className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" /> */}
       </div>
 
-      <main className="relative z-10">
+      <main className="relative z-10 ">
         {/* HERO SECTION */}
         <section
           ref={heroRef}
-          className="relative min-h-[100vh] flex flex-col justify-center px-6 md:px-24 pt-32 pb-16  text-white overflow-hidden"
+          className="relative min-h-screen h-full flex flex-col justify-center px-6 md:px-24 pt-32 pb-16  text-white overflow-hidden"
         >
           {/* Background blur spots */}
           <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-cyan-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -210,17 +210,17 @@ export default function App() {
             ))}
           </h1>
 
-<div className=' w-full flex'>
+          <div className=' w-full flex'>
             {/* Divider line */}
             <div className={`h-[1px] w-48 bg-gradient-to-r from-cyan-400 to-transparent mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
 
-          {/* Tagline */}
-          <p className={`text-xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed font-light transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-            {HERO_TAGLINE}
-          </p>
+            {/* Tagline */}
+            <p className={`text-xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed font-light transition-all duration-1000 delay-500 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+              {HERO_TAGLINE}
+            </p>
 
-         
-</div>
+
+          </div>
         </section>
 
         {/* PILLARS / BENTO SECTION */}
@@ -277,7 +277,7 @@ export default function App() {
             <div className="lg:col-span-7 space-y-4">
               {FEATURES.map((feature, i) => (
                 <FadeIn key={i} delay={i * 100} direction="right">
-                  <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-300 flex gap-6 items-start group">
+                  <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.05] hover:bg-white/[0.03] transition-all duration-300 flex gap-6 items-start group">
                     <div className="mt-1 text-cyan-400 group-hover:scale-125 transition-transform duration-300">
                       <CheckCircle2 size={24} />
                     </div>
@@ -307,15 +307,15 @@ export default function App() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Link  href="/connect"
-                   className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
+                  <Link href="/connect"
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2 group">
                     <Mail size={20} />
                     Get in touch
                     <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Link>
-                  <Link 
-                  href='/research'
-                  className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+                  <Link
+                    href='/research'
+                    className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                     <FileText size={20} />
                     View Research
                   </Link>
@@ -325,7 +325,7 @@ export default function App() {
           </FadeIn>
         </section>
 
-        
+
       </main>
     </div>
   );

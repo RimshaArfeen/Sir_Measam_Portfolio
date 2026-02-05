@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Mail, MessageCircle, Instagram, ArrowUpRight, Send, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 const HERO_TAGLINE = "Collaboration & Contact — clear, professional, direct.";
 
@@ -227,8 +228,14 @@ export default function App() {
                           name="name"
                           type="text"
                           placeholder="John Doe"
+                          pattern="[A-Za-z\s]+"
+                          title="Name should contain only letters"
+                          onChange={(e) => {
+                            e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                          }}
                           className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-gray-700"
                         />
+
                       </div>
                       <div className="space-y-2">
                         <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Email</label>
@@ -292,17 +299,20 @@ export default function App() {
       {/* Secondary CTA */}
       <footer className="px-6 md:px-24 py-32 bg-zinc-950/40 border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">No clutter. No forms overload. Just intent.</h2>
+          <h2 className="text-2xl md:text-5xl font-bold mb-8">No clutter. No forms overload. Just intent.</h2>
           <p className="text-gray-400 text-lg mb-12 font-light">
             Reach out directly for partnerships, investment, accelerators, or research collaboration. Clear and professional.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <a href="mailto:contact@muhammadmeasmraza.com" className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors">
+            <Link 
+            href="/connect"
+            // href="mailto:contact@muhammadmeasmraza.com" 
+            className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors">
               Get in Touch
-            </a>
-            <button className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-colors">
+            </Link>
+            <Link href="/impact" className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-colors">
               View Impact
-            </button>
+            </Link>
           </div>
         </div>
       </footer>

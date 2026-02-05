@@ -3,8 +3,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Award, Globe, Users, Star, ExternalLink, ShieldCheck, MessageCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const HERO_TAGLINE = "Global Recognition & Service — proof of responsibility.";
+import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
+const HERO_TAGLINE = "Global Recognition & Service, proof of responsibility.";
 
 const AWARDS = [
   {
@@ -105,6 +105,7 @@ export default function App() {
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-blue-600/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-cyan-600/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
+        <AnimatedBeamsBackground/>
       </div>
 
       {/* Hero Section */}
@@ -116,7 +117,7 @@ export default function App() {
             </p>
           </div>
 
-          <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
+          <h1 className="text-5xl md:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap">
             {"Impact".split("").map((char, i) => (
               <span key={i} className="inline-block overflow-hidden">
                 <span
@@ -127,12 +128,12 @@ export default function App() {
                 </span>
               </span>
             ))}
-            <span className="text-blue-600 animate-reveal opacity-0" style={{ animationDelay: '0.6s' }}>.</span>
+         
           </h1>
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             <div className="animate-line h-[1px] w-full md:w-48 bg-gradient-to-r from-blue-600 to-transparent origin-left opacity-0" style={{ animationDelay: '0.8s' }} />
-            <p className={`text-xl md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-1000 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+            <p className={`text-lg md:text-3xl text-gray-400 font-light max-w-2xl leading-tight transition-all duration-1000 delay-1000 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
               {HERO_TAGLINE}
             </p>
           </div>
@@ -141,19 +142,19 @@ export default function App() {
 
       {/* Awards & Recognition */}
       <ScrollSection title="Recognition" subtitle="Awards & Recognition" icon={<ShieldCheck className="w-4 h-4" />} accent="text-blue-500">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {AWARDS.map((award, i) => (
             <div
               key={i}
               style={{ transitionDelay: `${i * 150}ms` }}
-              className="group relative p-10 md:p-14 rounded-[2.5rem] bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden"
+              className="group relative p-6 md:p-10 rounded-[2.5rem] bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10">
                 <div className="mb-10 p-4 rounded-2xl bg-black w-fit border border-white/10 group-hover:scale-110 transition-transform duration-500">
                   {award.icon}
                 </div>
-                <h4 className="text-3xl md:text-4xl font-bold mb-6 group-hover:text-cyan-400 transition-colors">
+                <h4 className="text-lg md:text-4xl font-bold mb-6 group-hover:text-cyan-400 transition-colors">
                   {award.title}
                 </h4>
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -163,7 +164,7 @@ export default function App() {
                     </span>
                   ))}
                 </div>
-                <p className="text-xl text-gray-400 leading-relaxed font-light">
+                <p className=" text-sm md:text-xl text-gray-400 leading-relaxed font-light">
                   {award.desc}
                 </p>
               </div>
@@ -176,7 +177,7 @@ export default function App() {
       <section className="relative z-10 px-6 md:px-24 py-32 bg-zinc-950/30">
         <div className="max-w-7xl mx-auto">
           <SectionHeader accent="text-cyan-400" title="Academic & Corporate Path" subtitle="Global Programs" />
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {PROGRAMS.map((program, i) => (
               <div
                 key={i}
@@ -203,12 +204,12 @@ export default function App() {
             >
               <div className="md:w-1/3">
                 <p className="text-cyan-500 font-mono text-[10px] uppercase tracking-widest mb-2">{item.stat}</p>
-                <h4 className="text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">
+                <h4 className=" text-2xl md:text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">
                   {item.title}
                 </h4>
               </div>
               <div className="md:w-2/3">
-                <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
+                <p className="text-base md:text-xl text-gray-400 font-light leading-relaxed">
                   {item.body}
                 </p>
               </div>
@@ -219,18 +220,18 @@ export default function App() {
 
       {/* High-Impact CTA */}
       <section className="relative z-10 px-6 md:px-24 py-32">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative rounded-[3.5rem] p-12 md:p-24 bg-gradient-to-br from-blue-900/20 to-black border border-white/10 overflow-hidden group text-center">
+        <div className=" w-full md:max-w-6xl mx-auto">
+          <div className="relative rounded-[3.5rem] p-7 md:p-16 lg:p-24 bg-gradient-to-br from-blue-900/20 to-black border border-white/10 overflow-hidden group text-center">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full group-hover:scale-125 transition-transform duration-1000" />
 
-            <h2 className="relative z-10 text-4xl md:text-7xl font-bold text-white mb-8 tracking-tighter leading-none">
+            <h2 className="relative z-10 text-xl md:text-4xl lg:text-7xl font-bold text-white mb-8 tracking-tighter leading-none">
               Impact = proof of responsibility
             </h2>
-            <p className="relative z-10 text-xl md:text-2xl text-gray-400 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="relative z-10 text-base lg:text-2xl text-gray-400 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
               Real-world influence beyond business — awards, programs, and service that demonstrate commitment to global impact.
             </p>
 
-            <div className="relative z-10 flex flex-col sm:flex-row gap-6 justify-center">
+            <div className=" text-sm md:text-lg relative z-10 flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 href="/connect"
                  className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-all flex items-center justify-center gap-3 group">

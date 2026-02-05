@@ -28,7 +28,13 @@ const AnimatedBeamsBackground = () => {
           let animationFrameId: number;
           let width: number, height: number;
 
-          const baseBeamCount = 60;
+          const getBeamCount = () => {
+               const w = window.innerWidth;
+
+               if (w < 640) return 35;   // sm
+               if (w < 1024) return 55;  // md
+               return 75;               // lg+
+          };
           const maxBeams = 80;
 
           const createBeam = (isInitial = false, customX: number | null = null, customY: number | null = null): Beam => {
@@ -81,13 +87,16 @@ const AnimatedBeamsBackground = () => {
           const resize = () => {
                width = window.innerWidth;
                height = window.innerHeight;
+
                canvas.width = width * window.devicePixelRatio;
                canvas.height = height * window.devicePixelRatio;
                ctx.setTransform(1, 0, 0, 1, 0, 0);
                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
                beamsRef.current = [];
-               for (let i = 0; i < baseBeamCount; i++) {
+               const beamCount = getBeamCount();
+
+               for (let i = 0; i < beamCount; i++) {
                     beamsRef.current.push(createBeam(true));
                }
           };
