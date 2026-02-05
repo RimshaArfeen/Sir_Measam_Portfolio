@@ -71,39 +71,39 @@ const HomeImpactPreview = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 px-6 md:px-20 bg-black/40 overflow-hidden border-t border-white/5"
+      className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-20 bg-black/40 overflow-hidden border-t border-white/5"
     >
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row-reverse gap-20 items-center">
+        <div className="flex flex-col lg:flex-row-reverse gap-10 sm:gap-12 md:gap-16 lg:gap-20 items-center">
 
           {/* Content Column */}
           <div className={`lg:w-1/2 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="flex items-center gap-3 mb-6">
-              <Award className="w-5 h-5 text-blue-500" />
-              <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.4em]">Recognition</span>
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+              <span className="text-blue-500 font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em]">Recognition</span>
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tighter leading-tight sm:leading-none mb-6 sm:mb-8">
               Global Impact<span className="text-cyan-400">.</span>
             </h2>
 
-            <p className="text-2xl text-gray-400 font-light leading-relaxed mb-10">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-400 font-light leading-relaxed mb-8 sm:mb-10">
               {IMPACT_INTRO}
             </p>
 
-            <div className="space-y-6 mb-12">
+            <div className="space-y-3 sm:space-y-4 md:space-y-6 mb-8 sm:mb-12">
               {IMPACT_PROOF.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex gap-5 items-center p-5 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group"
+                  className="flex gap-3 sm:gap-4 md:gap-5 items-start sm:items-center p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group"
                 >
-                  <div className="p-3 rounded-xl bg-black border border-white/10 text-cyan-400 group-hover:scale-110 transition-transform">
-                    {item.icon}
+                  <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-black border border-white/10 text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                    {React.cloneElement(item.icon, { className: "w-4 h-4 sm:w-5 sm:h-5" })}
                   </div>
-                  <span className="text-gray-300 text-lg font-light leading-snug">
+                  <span className="text-gray-300 text-sm sm:text-base md:text-lg font-light leading-snug">
                     {item.text}
                   </span>
                 </div>
@@ -112,10 +112,10 @@ const HomeImpactPreview = () => {
 
             <a
               href="/impact"
-              className="group relative inline-flex items-center gap-4 px-10 py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:bg-cyan-400 active:scale-95"
+              className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 md:gap-4 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:bg-cyan-400 active:scale-95 w-full sm:w-auto text-center"
             >
-              <span className="relative z-10 uppercase tracking-widest text-sm">Explore the Full Impact</span>
-              <ArrowUpRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <span className="relative z-10 uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm">Explore the Full Impact</span>
+              <ArrowUpRight className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </a>
           </div>
 
@@ -124,8 +124,8 @@ const HomeImpactPreview = () => {
             className={`w-full lg:w-1/2 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <div className="relative p-1 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem]">
-              <div className="bg-zinc-950 rounded-[2.4rem] p-8 md:p-12 overflow-hidden relative min-h-[500px]">
+            <div className="relative p-1 bg-gradient-to-br from-white/10 to-transparent rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]">
+              <div className="bg-zinc-950 rounded-[1.9rem] sm:rounded-[1.9rem] md:rounded-[2.4rem] p-6 sm:p-8 md:p-10 lg:p-12 overflow-hidden relative min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
 
                 {/* Abstract Data Visualization Grid */}
                 <div className="absolute inset-0 opacity-10 flex items-center justify-center">
@@ -148,22 +148,22 @@ const HomeImpactPreview = () => {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-20 h-20 mb-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                    <MapPin className="w-8 h-8 text-blue-500 animate-pulse" />
+                <div className="relative z-10 flex flex-col items-center text-center justify-center h-full">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mb-6 sm:mb-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+                    <MapPin className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 animate-pulse" />
                   </div>
 
-                  <div className="text-6xl md:text-8xl font-black text-white/10 mb-2">
+                  <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white/10 mb-2">
                     PROOF
                   </div>
 
-                  <div className="text-xs font-mono text-cyan-200 bg-blue-900/40 px-3 py-1 rounded-sm uppercase tracking-[0.2em] mb-8 border border-blue-500/30">
+                  <div className="text-[10px] sm:text-xs font-mono text-cyan-200 bg-blue-900/40 px-2 sm:px-3 py-1 rounded-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-6 sm:mb-8 border border-blue-500/30">
                     Verified Benchmarks
                   </div>
 
-                  <div className="w-full space-y-4 max-w-xs">
+                  <div className="w-full space-y-3 sm:space-y-4 max-w-[250px] sm:max-w-xs">
                     {[85, 92, 78].map((w, i) => (
-                      <div key={i} className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div key={i} className="h-1 sm:h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full transition-all duration-[2s] delay-700"
                           style={{ width: isVisible ? `${w}%` : "0%" }}
