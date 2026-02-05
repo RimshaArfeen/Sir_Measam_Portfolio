@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "@/providers";
 import { User, MoveRight } from "lucide-react";
-import FounderImage from "@/public/mesam.jpg"
+import FounderImage from "@/public/mesam.webp"
 import Image from "next/image";
 
 
@@ -61,43 +61,26 @@ const useIntersectionObserver = <T extends HTMLElement>(
       {/* Decorative Blur Elements */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-          {/* Left Column: Visual/Heading */}
-          <div className={`lg:col-span-5 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          {/* Left Column: All Text Content */}
+          <div className={`order-2 lg:order-1 lg:col-span-6 space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-[1px] bg-cyan-500" />
               <span className="text-cyan-400 font-mono text-xs uppercase tracking-[0.4em]">The Visionary</span>
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-none mb-6">
               About the <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Founder</span>
             </h2>
 
-            {/* Visual Element: Stylized User Icon / Badge */}
-            <div className="relative w-24 h-24 flex items-center justify-center rounded-2xl bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden group">
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-              {/* Image */}
-              <Image
-                src={FounderImage}
-                alt="Founder"
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-          </div>
-
-          {/* Right Column: Content & Philosophy */}
-          <div className={`lg:col-span-7 space-y-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="space-y-6">
               {PHILOSOPHY.map((item, idx) => (
                 <div key={idx} className="group flex gap-6 items-start">
                   <span className="text-blue-500 font-mono text-lg mt-1">0{idx + 1}</span>
-                  <p className="text-xl md:text-2xl text-gray-400 font-light leading-snug group-hover:text-white transition-colors duration-300">
+                  <p className="text-base md:text-lg text-gray-400 font-light leading-snug group-hover:text-white transition-colors duration-300">
                     {item}
                   </p>
                 </div>
@@ -115,6 +98,25 @@ const useIntersectionObserver = <T extends HTMLElement>(
                 <span className="relative z-10 uppercase tracking-widest text-sm">Discover the full story</span>
                 <MoveRight className="relative z-10 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
               </a>
+            </div>
+          </div>
+
+          {/* Right Column: Founder Image */}
+          <div className={`order-1 lg:order-2 lg:col-span-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            <div className="relative max-w-[90%] sm:max-w-md mx-auto p-2 rounded-2xl border border-white/10 group">
+              <div className="rounded-xl overflow-hidden">
+                <Image
+                  src={FounderImage}
+                  alt="Founder"
+                  width={1200}
+                  height={1440}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                  quality={100}
+                  unoptimized
+                  priority
+                />
+              </div>
             </div>
           </div>
 

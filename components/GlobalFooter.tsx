@@ -1,16 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
-const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Greyn", href: "#greyn" },
-  { label: "Ventures", href: "#ventures" },
-  { label: "Research", href: "#research" },
-  { label: "Impact", href: "#impact" },
-  { label: "Connect", href: "#connect" },
-] as const;
+import logo from "@/public/logo.webp";
+import Image from "next/image";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/", icon: "home" },
@@ -59,23 +51,9 @@ const Icon = ({ name, className = "w-4 h-4" }: { name: string; className?: strin
   );
 };
 
-function NavLink({ label, href }: { label: string; href: string }) {
-  return (
-    <a
-      href={href}
-      className="relative group px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors cursor-pointer"
-      onClick={(e) => e.preventDefault()}
-    >
-      <span className="relative z-10">{label}</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-300 group-hover:w-full group-hover:left-0" />
-    </a>
-  );
-}
-
-
 const GlobalFooter = () => {
   return (
-    <footer className="relative bg-black text-white border-t border-white/5 overflow-hidden">
+    <footer className="relative z-[2] bg-black text-white border-t border-white/5 overflow-hidden">
       {/* Animated Accent Line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
 
@@ -89,10 +67,8 @@ const GlobalFooter = () => {
           {/* Column 1: Brand & Identity */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <a href="/" className="flex items-center gap-3 group w-fit">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center shadow-blue-500/20 shadow-lg">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600/20 to-cyan-400/20 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)] overflow-hidden">
+                <Image src={logo} alt="Meetech" className="h-full w-full" />
               </div>
               <span className="text-2xl font-bold tracking-tighter">
                 MESAM<span className="text-cyan-400">.</span>

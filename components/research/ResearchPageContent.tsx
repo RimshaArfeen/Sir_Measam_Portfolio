@@ -183,12 +183,12 @@ export default function App() {
       </div>
 
       {/* Focus Areas Section */}
-      <section className=" py-24 relative z-10">
+      <section className="py-24 relative z-10">
         <FocusAreas />
       </section>
 
       {/* Publications Section */}
-      <section className=" px-6 lg:px-10 py-24 bg-zinc-900/40 relative z-10 border-y border-white/5">
+      <section className="px-6 lg:px-10 py-24 bg-zinc-900/40 relative z-10 border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div className="mb-16">
             <h2 className="text-cyan-400 text-sm font-bold uppercase tracking-[0.3em] mb-4">Scholarly Impact</h2>
@@ -225,7 +225,7 @@ export default function App() {
       </section>
 
       {/* Upcoming Book Section */}
-      <section className=" py-32 relative z-10 overflow-hidden">
+      <section className="py-32 relative z-10 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="relative p-6 md:p-24 rounded-[2rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden shadow-2xl">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
@@ -249,7 +249,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className=" md:w-1/2 flex justify-center">
+              <div className="md:w-1/2 flex justify-center">
                 <div className="relative w-32 sm:w-64 h-48 sm:h-80 bg-zinc-800 rounded-r-lg shadow-2xl shadow-blue-500/20 transform rotate-6 hover:rotate-0 transition-transform duration-700 group cursor-pointer">
                   <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-6 border-r-4 border-blue-500/50">
@@ -265,7 +265,7 @@ export default function App() {
       </section>
 
       {/* CTA Section */}
-      <section className=" py-32 bg-black/80 relative z-10 border-t border-white/5 text-center">
+      <section className="py-32 bg-black/80 relative z-10 border-t border-white/5 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl md:text-6xl font-bold text-white mb-8 tracking-tight">
             Research = depth + credibility

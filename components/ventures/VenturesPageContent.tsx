@@ -199,7 +199,7 @@ export default function App() {
           </div>
 
           {/* Main Title */}
-          <h1 className=" text-5xl md:text-7xl lg:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap overflow-hidden">
+          <h1 className="text-5xl md:text-7xl lg:text-[11rem] font-bold tracking-tighter leading-[0.85] mb-12 flex flex-wrap overflow-hidden">
             {"Ventures".split("").map((char, i) => (
               <span
                 className="inline-block transform opacity-100 translate-y-0 transition-all duration-[1200ms]"

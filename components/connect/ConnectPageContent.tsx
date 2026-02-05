@@ -17,8 +17,8 @@ const CONTACT_LIST = [
   {
     id: "email",
     label: "Email",
-    href: "mailto:rimshaarfeen61@gmail.com",
-    value: "rimshaarfeen61@gmail.com",
+    href: "mailto:contact@muhammadmeasmraza.com",
+    value: "contact@muhammadmeasmraza.com",
     desc: "Primary for collaborations.",
     icon: <Mail className="w-5 h-5" />,
     color: "group-hover:text-blue-500"
@@ -216,13 +216,16 @@ export default function App() {
 
               {/* Right Column: Contact Form */}
               <div className="relative">
-                <div className="p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/30 border border-white/5 backdrop-blur-sm">
-                  <form 
-                  onSubmit={handleSubmit} 
+                {/* Gradient Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2.6rem] blur-lg opacity-20"></div>
+
+                <div className="relative p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-slate-50 to-blue-50/50 border border-blue-100 shadow-2xl">
+                  <form
+                  onSubmit={handleSubmit}
                   className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Name</label>
+                        <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Name</label>
                         <input
                           required
                           name="name"
@@ -233,54 +236,54 @@ export default function App() {
                           onChange={(e) => {
                             e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
                           }}
-                          className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-gray-700"
+                          className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
                         />
 
                       </div>
                       <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Email</label>
+                        <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Email</label>
                         <input
                           required
                           name="email"
                           type="email"
                           placeholder="john@example.com"
-                          className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-gray-700"
+                          className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Subject</label>
+                      <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Subject</label>
                       <input
                         required
                         name="subject"
                         type="text"
                         placeholder="Partnership Inquiry"
-                        className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-gray-700"
+                        className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-gray-500 ml-1">Message</label>
+                      <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Message</label>
                       <textarea
                         required
                         name="message"
                         rows={5}
                         placeholder="Tell me about your project..."
-                        className="w-full bg-black border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-gray-700 resize-none"
+                        className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 resize-none shadow-sm hover:border-blue-300"
                       />
                     </div>
 
                     <button
                       disabled={loading || submitted}
                       type="submit"
-                      className={`w-full py-5 rounded-xl font-bold transition-all flex items-center justify-center gap-3 ${submitted
+                      className={`w-full py-5 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg ${submitted
                           ? "bg-emerald-500 text-white cursor-default"
-                          : "bg-white text-black hover:bg-cyan-400 active:scale-[0.98]"
+                          : "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-blue-600 active:scale-[0.98] shadow-blue-500/30"
                         }`}
                     >
                       {loading ? (
-                        <div className="w-6 h-6 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                        <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                       ) : submitted ? (
                         <>Message Sent <CheckCircle2 className="w-5 h-5" /></>
                       ) : (

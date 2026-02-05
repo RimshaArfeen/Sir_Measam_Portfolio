@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import logo from "@/public/logo.png"
+import logo from "@/public/logo.webp"
 import Image from "next/image";
 
 const NAV_ITEMS = [
@@ -66,7 +66,7 @@ const GlobalHeader = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
 
         {/* Logo Section */}
-        <a href="#home" className="relative z-[110] flex items-center gap-3 group" aria-label="Home">
+        <a href="/" className="relative z-[110] flex items-center gap-3 group" aria-label="Home">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600/20 to-cyan-400/20 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)] group-hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transition-all">
 
             <Image

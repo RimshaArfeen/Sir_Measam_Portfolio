@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { LenisProvider, AnimationProvider } from "@/providers";
-import { NoiseOverlay, GlobalParticleBackground, PageTransition , CustomCursor } from "@/components";
+import { NoiseOverlay, GlobalParticleBackground, PageTransition } from "@/components";
 import "./globals.css";
 import GlobalHeader from "@/components/GlobalHeader";
 import GlobalFooter from "@/components/GlobalFooter";
@@ -39,7 +39,6 @@ export default function RootLayout({
         <LenisProvider>
           <AnimationProvider>
             <GlobalParticleBackground />
-            <CustomCursor />
             <GlobalHeader />
             <NoiseOverlay />
             <PageTransition>

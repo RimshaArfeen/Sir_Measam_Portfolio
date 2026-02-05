@@ -544,7 +544,7 @@ export default function App() {
         </section>
 
         {/* STATS STRIP */}
-        <section className=" w-full border-y border-white/5 bg-white/[0.02] backdrop-blur-md flex justify-around">
+        <section className="w-full border-y border-white/5 bg-white/[0.02] backdrop-blur-md flex justify-around">
           <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
             {STATS.map((stat, i) => (
               <FadeIn key={i} delay={i * 100} direction="none">
@@ -623,7 +623,7 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <img
-                      src="/mesam.jpg"
+                      src="/mesam.webp"
                       alt="Muhammad Measm Raza"
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       onError={(e) => {

@@ -84,7 +84,7 @@ export default function App() {
   const [heroRef, heroVisible] = useIntersectionObserver({ threshold: 0.1, once: true });
 
   return (
-    <div className="bg-black+70 text-white font-sans selection:bg-blue-500/30 min-h-screen overflow-x-hidden">
+    <div className="bg-black/70 text-white font-sans selection:bg-blue-500/30 min-h-screen overflow-x-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes revealText {

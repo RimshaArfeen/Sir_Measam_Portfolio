@@ -210,7 +210,7 @@ export default function App() {
             ))}
           </h1>
 
-          <div className=' w-full flex'>
+          <div className='w-full flex'>
             {/* Divider line */}
             <div className={`h-[1px] w-48 bg-gradient-to-r from-cyan-400 to-transparent mt-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
 
