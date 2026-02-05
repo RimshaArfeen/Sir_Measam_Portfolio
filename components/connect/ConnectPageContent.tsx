@@ -91,10 +91,10 @@ function LookingCard({ item, index }: LookingCardProps) {
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
       }}
-      className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 transition-all duration-500"
+      className="p-6 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-zinc-900/40 border border-white/5 transition-all duration-500"
     >
-      <h4 className="text-xl font-bold mb-4">{item.title}</h4>
-      <p className="text-sm text-gray-500">{item.desc}</p>
+      <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">{item.title}</h4>
+      <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">{item.desc}</p>
     </div>
   );
 }
@@ -141,34 +141,34 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="px-6 md:px-24 pt-32 pb-20">
+        <section className="px-4 sm:px-6 md:px-12 lg:px-24 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20">
           <div className="max-w-7xl mx-auto">
-            <p className="text-blue-500 font-mono tracking-[0.3em] uppercase text-xs mb-6 animate-fade-in">
+            <p className="text-blue-500 font-mono tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs mb-4 sm:mb-6 animate-fade-in">
               Get in Touch
             </p>
-            <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-8 leading-[0.9]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter mb-6 sm:mb-8 leading-[0.9]">
               Connect<span className="text-blue-600">.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 font-light max-w-2xl leading-relaxed animate-slide-up">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-400 font-light max-w-2xl leading-relaxed animate-slide-up">
               {HERO_TAGLINE}
             </p>
           </div>
         </section>
 
         {/* Looking For Section */}
-        <section className="px-6 md:px-24 py-24 border-t border-white/5 bg-zinc-950/20">
+        <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-16 sm:py-20 md:py-24 border-t border-white/5 bg-zinc-950/20">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 md:mb-16 gap-4 sm:gap-6">
               <div>
-                <h2 className="text-cyan-400 text-xs font-bold uppercase tracking-[0.4em] mb-4">Intent</h2>
-                <h3 className="text-4xl md:text-5xl font-bold">Currently Looking For</h3>
+                <h2 className="text-cyan-400 text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] sm:tracking-[0.4em] mb-3 sm:mb-4">Intent</h2>
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold">Currently Looking For</h3>
               </div>
-              <p className="text-gray-500 font-mono text-xs max-w-xs md:text-right">
+              <p className="text-gray-500 font-mono text-[10px] sm:text-xs max-w-xs md:text-right">
                 Prioritizing high-impact ventures with transparent governance.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
               {LOOKING_FOR.map((item, i) => (
                 <LookingCard key={i} item={item} index={i} />
               ))}
@@ -177,38 +177,38 @@ export default function App() {
         </section>
 
         {/* Contact Split Section */}
-        <section className="px-6 md:px-24 py-32">
+        <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-20 sm:py-24 md:py-32">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-20">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 sm:gap-16 md:gap-20">
 
               {/* Left Column: Direct Links */}
-              <div className="space-y-12">
+              <div className="space-y-8 sm:space-y-10 md:space-y-12">
                 <div>
-                  <h3 className="text-3xl font-bold mb-6">Direct Channels</h3>
-                  <p className="text-gray-400 font-light text-lg">
-                    “Let’s build systems that scale responsibly.” Reach out via the channel that fits your urgency.
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Direct Channels</h3>
+                  <p className="text-gray-400 font-light text-sm sm:text-base md:text-lg leading-relaxed">
+                    "Let's build systems that scale responsibly." Reach out via the channel that fits your urgency.
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {CONTACT_LIST.map((item) => (
                     <a
                       key={item.id}
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-300"
+                      className="group flex items-center justify-between p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-300"
                     >
-                      <div className="flex items-center gap-5">
-                        <div className={`p-3 rounded-xl bg-black border border-white/10 ${item.color} transition-colors`}>
-                          {item.icon}
+                      <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+                        <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl bg-black border border-white/10 ${item.color} transition-colors flex-shrink-0`}>
+                          {React.cloneElement(item.icon, { className: "w-4 h-4 sm:w-5 sm:h-5" })}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-white">{item.label}</p>
-                          <p className="text-xs text-gray-500">{item.value}</p>
+                          <p className="text-xs sm:text-sm font-medium text-white">{item.label}</p>
+                          <p className="text-[10px] sm:text-xs text-gray-500">{item.value}</p>
                         </div>
                       </div>
-                      <ArrowUpRight className="w-5 h-5 text-gray-700 group-hover:text-white transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 group-hover:text-white transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1 flex-shrink-0" />
                     </a>
                   ))}
                 </div>
@@ -217,15 +217,15 @@ export default function App() {
               {/* Right Column: Contact Form */}
               <div className="relative">
                 {/* Gradient Glow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2.6rem] blur-lg opacity-20"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2rem] sm:rounded-[2.3rem] md:rounded-[2.6rem] blur-lg opacity-20"></div>
 
-                <div className="relative p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-slate-50 to-blue-50/50 border border-blue-100 shadow-2xl">
+                <div className="relative p-6 sm:p-8 md:p-10 lg:p-12 rounded-[1.9rem] sm:rounded-[2.2rem] md:rounded-[2.5rem] bg-zinc-900/60 border border-white/10 shadow-2xl backdrop-blur-xl">
                   <form
                   onSubmit={handleSubmit}
-                  className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  className="space-y-5 sm:space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                       <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Name</label>
+                        <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Name</label>
                         <input
                           required
                           name="name"
@@ -236,58 +236,58 @@ export default function App() {
                           onChange={(e) => {
                             e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
                           }}
-                          className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
+                          className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
 
                       </div>
                       <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Email</label>
+                        <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Email</label>
                         <input
                           required
                           name="email"
                           type="email"
                           placeholder="john@example.com"
-                          className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
+                          className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Subject</label>
+                      <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Subject</label>
                       <input
                         required
                         name="subject"
                         type="text"
                         placeholder="Partnership Inquiry"
-                        className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 shadow-sm hover:border-blue-300"
+                        className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-blue-900 ml-1 font-bold">Message</label>
+                      <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Message</label>
                       <textarea
                         required
                         name="message"
                         rows={5}
                         placeholder="Tell me about your project..."
-                        className="w-full bg-white text-black border-2 border-blue-200 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-400 resize-none shadow-sm hover:border-blue-300"
+                        className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 resize-none hover:border-white/20 text-sm sm:text-base"
                       />
                     </div>
 
                     <button
                       disabled={loading || submitted}
                       type="submit"
-                      className={`w-full py-5 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg ${submitted
+                      className={`w-full py-4 sm:py-5 rounded-lg sm:rounded-xl font-bold transition-all flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base ${submitted
                           ? "bg-emerald-500 text-white cursor-default"
                           : "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-blue-600 active:scale-[0.98] shadow-blue-500/30"
                         }`}
                     >
                       {loading ? (
-                        <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                       ) : submitted ? (
-                        <>Message Sent <CheckCircle2 className="w-5 h-5" /></>
+                        <>Message Sent <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" /></>
                       ) : (
-                        <>Send Message <Send className="w-5 h-5" /></>
+                        <>Send Message <Send className="w-4 h-4 sm:w-5 sm:h-5" /></>
                       )}
                     </button>
                   </form>
@@ -300,20 +300,19 @@ export default function App() {
       </main>
 
       {/* Secondary CTA */}
-      <footer className="px-6 md:px-24 py-32 bg-zinc-950/40 border-t border-white/5">
+      <footer className="px-4 sm:px-6 md:px-12 lg:px-24 py-20 sm:py-24 md:py-32 bg-zinc-950/40 border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-5xl font-bold mb-8">No clutter. No forms overload. Just intent.</h2>
-          <p className="text-gray-400 text-lg mb-12 font-light">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8">No clutter. No forms overload. Just intent.</h2>
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg mb-8 sm:mb-10 md:mb-12 font-light leading-relaxed">
             Reach out directly for partnerships, investment, accelerators, or research collaboration. Clear and professional.
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link 
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6">
+            <Link
             href="/connect"
-            // href="mailto:contact@muhammadmeasmraza.com" 
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors">
+            className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors text-sm sm:text-base w-full sm:w-auto">
               Get in Touch
             </Link>
-            <Link href="/impact" className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-colors">
+            <Link href="/impact" className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-colors text-sm sm:text-base w-full sm:w-auto">
               View Impact
             </Link>
           </div>
