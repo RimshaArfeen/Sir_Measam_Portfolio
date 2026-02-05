@@ -121,7 +121,7 @@ const HomeImpactPreview = () => {
 
           {/* Visual Column: Impact Map / Proof points */}
           <div
-            className={`lg:w-1/2 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={` w-full lg:w-1/2 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
             <div className="relative p-1 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem]">

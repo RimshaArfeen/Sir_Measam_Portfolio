@@ -502,7 +502,7 @@ export default function App() {
         {/* HERO SECTION */}
         <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-12">
+            <h1 className="text-3xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-12">
               {INTRO.split(" ").map((word, i) => (
                 <span key={i} className="inline-block mr-[0.25em]">
                   <FadeIn delay={i * 50} direction="up">
