@@ -109,7 +109,7 @@ const GlobalHeader = () => {
       </div>
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black z-[105] transition-transform duration-500 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-[105] transition-transform duration-500 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         {/* Background Decorative Gradients */}
