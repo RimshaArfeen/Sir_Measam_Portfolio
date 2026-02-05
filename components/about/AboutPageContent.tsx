@@ -566,7 +566,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
             {/* Left Content */}
-            <div className="lg:col-span-7 space-y-12">
+            <div className="order-2 lg:order-1 lg:col-span-7 space-y-12">
               <div className="space-y-6">
                 <FadeIn direction="left">
                   <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-4">
@@ -609,7 +609,7 @@ export default function App() {
             </div>
 
             {/* Right Image Container */}
-            <div className="lg:col-span-5 lg:sticky lg:top-32">
+            <div className="order-1 lg:order-2 lg:col-span-5 lg:sticky lg:top-32">
               <FadeIn direction="right" delay={200}>
                 <div className="relative group">
                   {/* Decorative Frame */}

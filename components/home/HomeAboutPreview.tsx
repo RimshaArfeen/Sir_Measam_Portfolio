@@ -103,15 +103,24 @@ const useIntersectionObserver = <T extends HTMLElement>(
 
           {/* Right Column: Founder Image */}
           <div className={`order-1 lg:order-2 lg:col-span-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative max-w-[90%] sm:max-w-md mx-auto p-2 rounded-2xl border border-white/10 group">
-              <div className="rounded-xl overflow-hidden">
+            <div className="relative w-full max-w-lg mx-auto">
+              {/* Decorative Frame */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/10 shadow-2xl group">
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-60" />
+
+                {/* Interactive Border Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <Image
                   src={FounderImage}
                   alt="Founder"
                   width={1200}
                   height={1440}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   quality={100}
                   unoptimized
                   priority
