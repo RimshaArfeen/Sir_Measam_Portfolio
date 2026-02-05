@@ -193,9 +193,9 @@ export default function App() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter mb-8 leading-[0.9] flex flex-wrap overflow-hidden">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter mb-8 leading-tight sm:leading-[0.95] md:leading-[0.9] flex flex-wrap">
             {"Greyn".split("").map((char, i) => (
-              <span key={i} className="inline-block overflow-hidden">
+              <span key={i} className="inline-block">
                 <span
                   className={`inline-block transition-transform duration-700 ease-out`}
                   style={{
