@@ -5,7 +5,7 @@ import logo from "@/public/logo.png"
 import Image from "next/image";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "/home" },
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Greyn", href: "/greyn" },
   { label: "Ventures", href: "/ventures" },
@@ -107,22 +107,22 @@ const GlobalHeader = () => {
           </button>
         </div>
       </div>
-
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black z-[105] transition-transform duration-700 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 bg-black z-[105] transition-transform duration-500 ease-in-out lg:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         {/* Background Decorative Gradients */}
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-blue-600/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-400/10 blur-[120px] rounded-full" />
 
-        <nav className="flex flex-col items-center justify-center h-full gap-8 px-6 text-center">
+        {/* Mobile Nav */}
+        <nav className="flex flex-col items-center justify-center min-h-screen gap-8 px-6 text-center overflow-y-auto ">
           {NAV_ITEMS.map((item, idx) => (
             <a
               key={item.label}
               href={item.href}
-              className={`text-3xl font-bold text-white hover:text-cyan-400 transition-all duration-500 ${mobileOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              className={`text-xl font-bold text-white hover:text-cyan-400 transition-all duration-500 ${mobileOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 }`}
               style={{ transitionDelay: `${idx * 50}ms` }}
               onClick={() => setMobileOpen(false)}
@@ -131,15 +131,17 @@ const GlobalHeader = () => {
             </a>
           ))}
 
+          {/* Optional Action Button */}
           <a
-            href="#connect"
-            className="mt-8 px-10 py-4 bg-white text-black font-bold rounded-2xl active:scale-95 transition-transform"
+            href="/connect"
+            className="mt-8 px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-2xl shadow-lg active:scale-95 transition-transform"
             onClick={() => setMobileOpen(false)}
           >
-            Get Started
+            Work with me
           </a>
         </nav>
       </div>
+
     </header>
   );
 }

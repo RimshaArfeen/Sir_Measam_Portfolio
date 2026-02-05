@@ -6,6 +6,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "@/providers";
 import { User, MoveRight } from "lucide-react";
+import FounderImage from "@/public/mesam.jpg"
+import Image from "next/image";
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 const PHILOSOPHY = [
@@ -74,8 +78,16 @@ const useIntersectionObserver = <T extends HTMLElement>(
 
             {/* Visual Element: Stylized User Icon / Badge */}
             <div className="relative w-24 h-24 flex items-center justify-center rounded-2xl bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden group">
+              {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <User className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-500" />
+
+              {/* Image */}
+              <Image
+                src={FounderImage}
+                alt="Founder"
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
+              />
             </div>
           </div>
 
@@ -95,7 +107,7 @@ const useIntersectionObserver = <T extends HTMLElement>(
             <div className="pt-8">
               <a
                 href="/about"
-                className="group relative inline-flex items-center gap-4 px-10 py-5 bg-transparent border border-white/10 rounded-full text-white font-bold overflow-hidden transition-all hover:border-cyan-500/50"
+                className="group relative inline-flex items-center md:gap-4 px-6 md:px-10 py-5 bg-transparent border border-white/10 rounded-full text-white font-bold overflow-hidden transition-all hover:border-cyan-500/50"
               >
                 {/* Button Hover Background */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />

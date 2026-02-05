@@ -4,6 +4,7 @@ import HomeAboutPreview from "@/components/home/HomeAboutPreview";
 import HomeGreynPreview from "@/components/home/HomeGreynPreview";
 import HomeImpactPreview from "@/components/home/HomeImpactPreview";
 import HomeFinalCTA from "@/components/home/HomeFinalCTA";
+import Link from "next/link";
 
 
 // --- MAIN PORTFOLIO COMPONENT ---
@@ -20,7 +21,7 @@ const App = () => {
       <AnimatedBeamsBackground />
 
       <main className="relative z-10 w-full mx-auto px-6 md:px-20 py-24 md:py-48">
-        <div className=" w-full space-y-10 pb-24 px-20">
+        <div className=" w-full space-y-10 pb-24 md:px-20 py-20">
           {/* Badge using Electric Blue and Cyan */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/5 text-cyan-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -48,16 +49,17 @@ const App = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-5 pt-6">
-            <button className="px-10 py-4 bg-cyan-400 text-black font-bold rounded-2xl hover:bg-white transition-all shadow-2xl shadow-cyan-500/20 active:scale-95">
+            <Link href="/greyn"
+             className=" text-center md:text-left px-10 py-4 bg-cyan-400 text-black font-bold rounded-2xl hover:bg-white transition-all shadow-2xl shadow-cyan-500/20 active:scale-95">
               Explore the Work
-            </button>
-            <button className="px-10 py-4 border border-slate-700 bg-black/50 backdrop-blur-md text-white font-bold rounded-2xl hover:border-cyan-500 transition-all active:scale-95">
+            </Link>
+            <Link href="/connect" className=" text-center md:text-left px-10 py-4 border border-slate-700 bg-black/50 backdrop-blur-md text-white font-bold rounded-2xl hover:border-cyan-500 transition-all active:scale-95">
               Contact Founder
-            </button>
+            </Link>
           </div>
         </div>
 
-        <section className=" w-full mt-40 grid grid-cols-1 md:grid-cols-3 gap-10 pb-24  px-20">
+        <section className=" w-full mt-40 grid grid-cols-1 md:grid-cols-3 gap-10 pb-24  md:px-20">
           {[
             { title: 'Climate-Tech', desc: 'Leveraging technology to solve the most pressing environmental challenges.' },
             { title: 'Entrepreneurship', desc: 'Building and scaling companies with a global-first mindset.' },

@@ -120,9 +120,13 @@ const HomeImpactPreview = () => {
           </div>
 
           {/* Visual Column: Impact Map / Proof points */}
-          <div className={`lg:w-1/2 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`lg:w-1/2 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+          >
             <div className="relative p-1 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem]">
-              <div className="bg-zinc-950 rounded-[2.4rem] p-8 md:p-12 overflow-hidden relative">
+              <div className="bg-zinc-950 rounded-[2.4rem] p-8 md:p-12 overflow-hidden relative min-h-[500px]">
+
                 {/* Abstract Data Visualization Grid */}
                 <div className="absolute inset-0 opacity-10 flex items-center justify-center">
                   <div className="w-full h-full grid grid-cols-6 grid-rows-6">
@@ -132,20 +136,37 @@ const HomeImpactPreview = () => {
                   </div>
                 </div>
 
+                {/* Background Image - Updated to a Global Connectivity Tech Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2006&auto=format&fit=crop"
+                    alt="Global Network Connectivity"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Dark overlay maintained for text legibility */}
+                  <div className="absolute inset-0 bg-black/80"></div>
+                </div>
+
+                {/* Content */}
                 <div className="relative z-10 flex flex-col items-center text-center">
                   <div className="w-20 h-20 mb-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
                     <MapPin className="w-8 h-8 text-blue-500 animate-pulse" />
                   </div>
-                  <div className="text-6xl md:text-8xl font-black text-white/10 mb-2">PROOF</div>
-                  <div className="text-sm font-mono text-cyan-400 uppercase tracking-[0.5em] mb-8">Verified Benchmarks</div>
 
-                  {/* Decorative Stat Bars */}
+                  <div className="text-6xl md:text-8xl font-black text-white/10 mb-2">
+                    PROOF
+                  </div>
+
+                  <div className="text-xs font-mono text-cyan-200 bg-blue-900/40 px-3 py-1 rounded-sm uppercase tracking-[0.2em] mb-8 border border-blue-500/30">
+                    Verified Benchmarks
+                  </div>
+
                   <div className="w-full space-y-4 max-w-xs">
                     {[85, 92, 78].map((w, i) => (
                       <div key={i} className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full transition-all duration-[2s] delay-700"
-                          style={{ width: isVisible ? `${w}%` : '0%' }}
+                          style={{ width: isVisible ? `${w}%` : "0%" }}
                         />
                       </div>
                     ))}
@@ -154,6 +175,7 @@ const HomeImpactPreview = () => {
               </div>
             </div>
           </div>
+
 
         </div>
       </div>

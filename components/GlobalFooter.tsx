@@ -188,10 +188,10 @@ const GlobalFooter = () => {
           <p className="text-[10px] text-gray-600 uppercase tracking-widest font-medium">
             © {new Date().getFullYear()} Muhammad Mesam Raza. All Rights Reserved.
           </p>
-          <div className="flex gap-8 text-[10px] text-gray-600 uppercase tracking-widest font-medium">
+          {/* <div className="flex gap-8 text-[10px] text-gray-600 uppercase tracking-widest font-medium">
             <a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Use</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
 
-const GREYN_STATEMENT = "Scalable technology and climate systems — built for verification, impact, and scale beyond borders.";
+const GREYN_STATEMENT = "Scalable technology and climate systems, built for verification, impact, and scale beyond borders.";
 
 const GREYN_HIGHLIGHTS = [
   { text: "Verified climate impact & ESG infrastructure", icon: <ShieldCheck className="w-5 h-5 text-cyan-400" /> },
