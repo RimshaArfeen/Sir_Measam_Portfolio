@@ -132,13 +132,13 @@ const GlobalHeader = () => {
           ))}
 
           {/* Optional Action Button */}
-          <a
+          {/* <a
             href="/connect"
             className="mt-8 px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-2xl shadow-lg active:scale-95 transition-transform"
-            onClick={() => setMobileOpen(false)}
+            // onClick={() => setMobileOpen(false)}
           >
             Work with me
-          </a>
+          </a> */}
         </nav>
       </div>
 

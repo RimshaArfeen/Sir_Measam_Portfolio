@@ -58,14 +58,14 @@ const HomeFinalCTA = () => {
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[160px] rounded-full transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.03)_0%,transparent_70%)]" />
 
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
+      <div className="w-full md:max-w-4xl mx-auto relative z-10 text-center">
         {/* Animated Line Component */}
         <div className="flex justify-center mb-12">
           <div className={`h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent transition-all duration-1000 ease-in-out ${isVisible ? 'w-32 opacity-100' : 'w-0 opacity-0'}`} />
         </div>
 
-        <div className={`transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-6xl md:text-[7rem] font-black text-white tracking-tighter leading-none mb-10 selection:bg-blue-600">
+        <div className={`w-full transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="  text-3xl md:text-6xl md:text-[7rem] font-black text-white tracking-tighter leading-none mb-10 selection:bg-blue-600">
             Let’s build <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600 animate-gradient-x">
               together.
@@ -80,10 +80,10 @@ const HomeFinalCTA = () => {
         <div className={`flex flex-col items-center gap-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
           <a
             href="/connect"
-            className="group relative flex items-center gap-4 px-12 py-6 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+            className="group relative flex items-center gap-4 px-6 md:px-12 py-6 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.15)]"
           >
             <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative z-10 text-lg uppercase tracking-[0.2em]">Start a Conversation</span>
+            <span className="relative z-10 text-sm md:text-lg uppercase tracking-[0.2em]">Start a Conversation</span>
             <Send className="relative z-10 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
 
