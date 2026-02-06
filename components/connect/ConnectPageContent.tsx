@@ -125,10 +125,10 @@ export default function App() {
     setLoading(false);
 
     if (res.ok) {
-      alert("Message sent!");
+      alert("Message sent successfully!");
       e.target.reset();
     } else {
-      alert("Error sending message");
+      alert("Error sending message. Please try again.");
     }
   }
   return (
