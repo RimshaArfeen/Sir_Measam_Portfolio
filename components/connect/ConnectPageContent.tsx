@@ -116,9 +116,7 @@ export default function App() {
 
     const res = await fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: formData.get("name"),
         email: formData.get("email"),
@@ -130,10 +128,20 @@ export default function App() {
     setLoading(false);
 
     if (res.ok) {
-      alert("Message sent successfully!");
+      Swal.fire({
+        icon: "success",
+        title: "Sent!",
+        text: "Your message was sent successfully 💌",
+        confirmButtonColor: "#16a34a",
+      });
       e.target.reset();
     } else {
-      alert("Error sending message. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops!",
+        text: "Something went wrong. Try again.",
+        confirmButtonColor: "#dc2626",
+      });
     }
   }
   return (
