@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Mail, MessageCircle, Instagram, ArrowUpRight, Send, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
 
 const HERO_TAGLINE = "Collaboration & Contact   clear, professional, direct.";
 
@@ -137,6 +138,7 @@ export default function App() {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full" />
         <div className="absolute bottom-[20%] left-[-5%] w-[400px] h-[400px] bg-cyan-500/5 blur-[100px] rounded-full" />
+        <AnimatedBeamsBackground/>
       </div>
 
       <main className="relative z-10">
@@ -213,8 +215,7 @@ export default function App() {
                   ))}
                 </div>
               </div>
-
-              {/* Right Column: Contact Form */}
+             {/* Right Column: Contact Form */}
               <div className="relative">
                 {/* Gradient Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2rem] sm:rounded-[2.3rem] md:rounded-[2.6rem] blur-lg opacity-20"></div>
@@ -222,7 +223,8 @@ export default function App() {
                 <div className="relative p-4 py-8 md:p-10 lg:p-12 rounded-[1.9rem] sm:rounded-[2.2rem] md:rounded-[2.5rem] bg-zinc-900/60 border border-white/10 shadow-2xl backdrop-blur-xl">
                   <form
                     onSubmit={handleSubmit}
-                    className="space-y-5 sm:space-y-6">
+                    className="space-y-5 sm:space-y-6"
+                  >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                       <div className="space-y-2">
                         <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Name</label>
@@ -236,10 +238,13 @@ export default function App() {
                           onChange={(e) => {
                             e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
                           }}
+                          onBlur={(e) => {
+                            if (!e.target.value) alert("Name is required!");
+                          }}
                           className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
-
                       </div>
+
                       <div className="space-y-2">
                         <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Email</label>
                         <input
@@ -247,6 +252,11 @@ export default function App() {
                           name="email"
                           type="email"
                           placeholder="john@example.com"
+                          onBlur={(e) => {
+                            if (!e.target.value) alert("Email is required!");
+                            else if (!/^[\w.-]+@[\w.-]+\.\w{2,}$/.test(e.target.value))
+                              alert("Enter a valid email!");
+                          }}
                           className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
                       </div>
@@ -259,6 +269,9 @@ export default function App() {
                         name="subject"
                         type="text"
                         placeholder="Partnership Inquiry"
+                        onBlur={(e) => {
+                          if (!e.target.value) alert("Subject is required!");
+                        }}
                         className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                       />
                     </div>
@@ -270,6 +283,9 @@ export default function App() {
                         name="message"
                         rows={5}
                         placeholder="Tell me about your project..."
+                        onBlur={(e) => {
+                          if (!e.target.value) alert("Message is required!");
+                        }}
                         className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 resize-none hover:border-white/20 text-sm sm:text-base"
                       />
                     </div>
@@ -291,8 +307,10 @@ export default function App() {
                       )}
                     </button>
                   </form>
+
                 </div>
               </div>
+             
 
             </div>
           </div>
