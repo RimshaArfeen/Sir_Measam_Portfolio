@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "@/providers";
 import { User, MoveRight } from "lucide-react";
-import FounderImage from "@/public/mesam.webp"
+import FounderImage from "@/public/mesam.png"
 import Image from "next/image";
 
 
@@ -103,9 +103,9 @@ const HomeAboutPreview = () => {
 
           {/* Right Column: Founder Image */}
           <div className={`order-1 lg:order-2 lg:col-span-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative w-full max-w-lg mx-auto">
+            <div className="relative w-full max-w-3xl mx-auto">
               {/* Decorative Frame */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
               <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/10 shadow-2xl group">
                 {/* Overlay Gradient */}
@@ -120,7 +120,7 @@ const HomeAboutPreview = () => {
                   width={1200}
                   height={1440}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-contain object-top transition-transform duration-700 group-hover:scale-105"
                   quality={100}
                   unoptimized
                   priority
