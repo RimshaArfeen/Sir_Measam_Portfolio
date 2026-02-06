@@ -20,7 +20,7 @@ const App = () => {
     <div className="relative min-h-screen text-slate-100 font-sans bg-black/20 selection:bg-cyan-500/30">
       <AnimatedBeamsBackground />
 
-      <main className="relative z-10 w-full mx-auto px-6 md:px-20 py-24 md:py-48">
+      <main className="relative z-10 w-full mx-auto px-6 md:px-20 py-24 md:pt-36 md:pb-48">
         <div className="w-full space-y-10 pb-24 md:px-20 py-20">
           {/* Badge using Electric Blue and Cyan */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/5 text-cyan-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
