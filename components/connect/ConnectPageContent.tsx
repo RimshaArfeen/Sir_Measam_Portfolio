@@ -4,6 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Mail, MessageCircle, Instagram, ArrowUpRight, Send, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const HERO_TAGLINE = "Collaboration & Contact   clear, professional, direct.";
 
@@ -239,7 +243,11 @@ export default function App() {
                             e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
                           }}
                           onBlur={(e) => {
-                            if (!e.target.value) alert("Name is required!");
+                            if (!e.target.value) Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Name is required!"
+                            });
                           }}
                           className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
@@ -253,12 +261,14 @@ export default function App() {
                           type="email"
                           placeholder="john@example.com"
                           onBlur={(e) => {
-                            if (!e.target.value) alert("Email is required!");
+                            if (!e.target.value) Swal.fire({ icon: "error", title: "Oops...", text: "Email is required!" });
                             else if (!/^[\w.-]+@[\w.-]+\.\w{2,}$/.test(e.target.value))
-                              alert("Enter a valid email!");
+                              Swal.fire({ icon: "error", title: "Oops...", text: "Enter a valid email!" });
                           }}
                           className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                         />
+
+
                       </div>
                     </div>
 
@@ -270,7 +280,7 @@ export default function App() {
                         type="text"
                         placeholder="Partnership Inquiry"
                         onBlur={(e) => {
-                          if (!e.target.value) alert("Subject is required!");
+                          if (!e.target.value) Swal.fire({ icon: "error", title: "Oops...", text: "Subject is required!" });
                         }}
                         className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 hover:border-white/20 text-sm sm:text-base"
                       />
@@ -284,7 +294,7 @@ export default function App() {
                         rows={5}
                         placeholder="Tell me about your project..."
                         onBlur={(e) => {
-                          if (!e.target.value) alert("Message is required!");
+                          if (!e.target.value) Swal.fire({ icon: "error", title: "Oops...", text: "Message is required!" });
                         }}
                         className="w-full bg-black/40 text-white border border-white/10 rounded-lg sm:rounded-xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-gray-600 resize-none hover:border-white/20 text-sm sm:text-base"
                       />
