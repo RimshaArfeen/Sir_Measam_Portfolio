@@ -2,13 +2,13 @@
 @import "lenis/dist/lenis.css";
 
 /* ==========================================================================
-   GLOBAL FOUNDATION — Dark Luxury Design System
-   Tailwind v4 @theme — CEO-grade, cinematic, calm
+   GLOBAL FOUNDATION   Dark Luxury Design System
+   Tailwind v4 @theme   CEO-grade, cinematic, calm
    ========================================================================== */
 
 @theme inline {
   /* --------------------------------------------------------------------------
-     COLOR — Intentional, minimal. Near-black base, soft off-white, muted accent.
+     COLOR   Intentional, minimal. Near-black base, soft off-white, muted accent.
      -------------------------------------------------------------------------- */
   --color-bg: #0c0c0d;
   --color-bg-elevated: #141416;
@@ -24,16 +24,16 @@
   --color-accent-cyan: #7dd3c0;
   --color-accent-cyan-muted: rgba(125, 211, 192, 0.4);
 
-  /* Typography — Inter only (single font, whole site) */
+  /* Typography   Inter only (single font, whole site) */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Font weights — hierarchy via weight and spacing, not color */
+  /* Font weights   hierarchy via weight and spacing, not color */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Type scale — consistent rhythm, calm, executive */
+  /* Type scale   consistent rhythm, calm, executive */
   --text-hero: 4.5rem;
   --text-hero-tracking: -0.04em;
   --text-display: 3rem;
@@ -46,13 +46,13 @@
   --text-caption: 0.875rem;
   --text-meta: 0.75rem;
 
-  /* Line heights — generous for body, tight for headlines */
+  /* Line heights   generous for body, tight for headlines */
   --leading-tight: 1.1;
   --leading-snug: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
 
-  /* Spacing scale — vertical rhythm, wide negative space */
+  /* Spacing scale   vertical rhythm, wide negative space */
   --space-section: 6rem;
   --space-section-sm: 4rem;
   --space-block: 2rem;
@@ -64,7 +64,7 @@
   --space-page-x: clamp(1.5rem, 5vw, 3rem);
   --space-page-y: clamp(2rem, 6vh, 4rem);
 
-  /* Easing — for transitions and future GSAP/ScrollTrigger */
+  /* Easing   for transitions and future GSAP/ScrollTrigger */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -118,10 +118,10 @@ body {
 }
 
 /* ==========================================================================
-   TYPOGRAPHY UTILITIES — Inter only, hierarchy via weight & spacing
+   TYPOGRAPHY UTILITIES   Inter only, hierarchy via weight & spacing
    ========================================================================== */
 
-/* 1. Hero headline — large, semi-bold/bold, tight tracking, cinematic */
+/* 1. Hero headline   large, semi-bold/bold, tight tracking, cinematic */
 .text-hero {
   font-family: var(--font-sans);
   font-size: clamp(2.5rem, 8vw, var(--text-hero));
@@ -130,7 +130,7 @@ body {
   line-height: var(--leading-tight);
 }
 
-/* 2. Section headings — medium-large, medium/semi-bold, clear authority */
+/* 2. Section headings   medium-large, medium/semi-bold, clear authority */
 .text-display {
   font-family: var(--font-sans);
   font-size: clamp(1.75rem, 4vw, var(--text-display));
@@ -162,7 +162,7 @@ body {
   line-height: var(--leading-snug);
 }
 
-/* 3. Body — comfortable size, regular weight, generous line height */
+/* 3. Body   comfortable size, regular weight, generous line height */
 .text-body {
   font-family: var(--font-sans);
   font-size: var(--text-body);
@@ -177,7 +177,7 @@ body {
   line-height: var(--leading-relaxed);
 }
 
-/* 4. Captions / metadata — smaller scale, slightly reduced opacity */
+/* 4. Captions / metadata   smaller scale, slightly reduced opacity */
 .text-caption {
   font-family: var(--font-sans);
   font-size: var(--text-caption);
@@ -196,7 +196,7 @@ body {
   line-height: var(--leading-normal);
 }
 
-/* Hero role / headline — larger than caption, professional presence */
+/* Hero role / headline   larger than caption, professional presence */
 .text-hero-role {
   font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
   font-weight: 500;
@@ -204,7 +204,7 @@ body {
   line-height: var(--leading-snug);
 }
 
-/* Hero body — slightly larger for readability */
+/* Hero body   slightly larger for readability */
 .text-hero-body {
   font-size: clamp(1.0625rem, 1.75vw, 1.25rem);
   font-weight: 400;
@@ -320,7 +320,7 @@ body {
   }
 }
 
-/* Nav link — animated underline on hover, high contrast for visibility */
+/* Nav link   animated underline on hover, high contrast for visibility */
 .header-nav-link {
   position: relative;
   font-size: var(--text-caption);
@@ -432,7 +432,7 @@ body {
   transform: scale(1.08);
 }
 
-/* Page CTA Section — professional button hovers */
+/* Page CTA Section   professional button hovers */
 .page-cta-primary {
   transition: background-color 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
 }
@@ -559,7 +559,7 @@ body {
   animation: global-hero-fade-in 1.2s ease-out 0.3s forwards;
 }
 
-/* Hero CTA button — subtle pulse glow */
+/* Hero CTA button   subtle pulse glow */
 @keyframes hero-cta-pulse {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);

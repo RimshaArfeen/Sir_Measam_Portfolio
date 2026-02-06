@@ -5,7 +5,7 @@ import { BookOpen, Globe, Award, Zap, ArrowUpRight, MessageSquare, Lightbulb } f
 import AnimatedBeamsBackground from "../AnimatedBeamsBackground/AnimatedBeamsBackground";
 import Link from "next/link";
 // DATA SECTION (Fixed/Integrated)
-const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
+const HERO_TAGLINE = "Intellectual Authority   depth and credibility.";
 
 const PUBLICATIONS = [
   {
@@ -39,7 +39,7 @@ const FOCUS_AREAS = [
   },
   {
     title: "Sustainability ecosystems",
-    desc: "Systems thinking for climate, ESG, and impact — from verification to scalable solutions.",
+    desc: "Systems thinking for climate, ESG, and impact   from verification to scalable solutions.",
     icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500 flex-shrink-0" />,
   },
   {
@@ -285,7 +285,7 @@ export default function App() {
         </div>
       </section>
 
-     
+
     </div>
   );
 }

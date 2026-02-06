@@ -11,7 +11,7 @@ The site uses **Inter** as the only font family. Hierarchy is created with **wei
 ### Primary and only font: Inter
 
 - **Source:** Next.js `next/font/google` (Inter), variable `--font-inter`, subsets `latin`, weights 400, 500, 600, 700, `display: "swap"`.
-- **Usage:** All UI — hero, section headings, body, captions, header, nav. No secondary or decorative font.
+- **Usage:** All UI   hero, section headings, body, captions, header, nav. No secondary or decorative font.
 - **Rationale:**
   - Built for systems, products, and serious interfaces.
   - Strong readability at small and large sizes.

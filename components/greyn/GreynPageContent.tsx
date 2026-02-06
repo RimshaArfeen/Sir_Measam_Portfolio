@@ -23,7 +23,7 @@ import Link from 'next/link';
  */
 
 const HERO_TAGLINE =
-  "Scalable technology and climate systems — built for verification, impact, and scale beyond borders.";
+  "Scalable technology and climate systems   built for verification, impact, and scale beyond borders.";
 
 const PILLARS = [
   {
@@ -50,7 +50,7 @@ const FEATURES = [
   },
   {
     title: "Execution-first",
-    body: "Teams, products, and go-to-market — shipped, not theorized.",
+    body: "Teams, products, and go-to-market   shipped, not theorized.",
   },
   {
     title: "Built for borders",
@@ -301,7 +301,7 @@ export default function App() {
                   Built for impact at scale.
                 </h2>
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed">
-                  Greyn powers ventures across climate-tech, platforms, and digital infrastructure — execution-first, globally.
+                  Greyn powers ventures across climate-tech, platforms, and digital infrastructure   execution-first, globally.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">

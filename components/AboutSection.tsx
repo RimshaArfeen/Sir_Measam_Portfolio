@@ -13,7 +13,7 @@ const INTRO =
 const PARAGRAPHS = [
   "I am a young founder, researcher, and global impact builder leading multi-sector ventures across climate-tech, ESG infrastructure, technology platforms, and digital services.",
   "I operate remote-first, globally distributed teams, build scalable products, publish research, and launch solutions designed for international adoption and measurable impact.",
-  "My work sits at the intersection of technology, sustainability, and execution — focused on transparency, verification, and systems that scale beyond borders.",
+  "My work sits at the intersection of technology, sustainability, and execution   focused on transparency, verification, and systems that scale beyond borders.",
 ] as const;
 
 const TRAITS = [

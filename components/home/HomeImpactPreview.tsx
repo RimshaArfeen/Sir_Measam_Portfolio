@@ -15,20 +15,20 @@ const AnimatedBeamsBackground = () => (
 );
 
 // DATA SECTION
-const HERO_TAGLINE = "Intellectual Authority — depth and credibility.";
+const HERO_TAGLINE = "Intellectual Authority   depth and credibility.";
 
 const PHILOSOPHY = [
   "I build systems that solve real-world problems at scale.",
-  "Execution-first: teams, products, and go-to-market — shipped, not theorized.",
+  "Execution-first: teams, products, and go-to-market   shipped, not theorized.",
   "Operating globally, remote-first, founder-led.",
 ];
 
-const GREYN_STATEMENT = "Scalable technology and climate systems — built for verification, impact, and scale beyond borders.";
+const GREYN_STATEMENT = "Scalable technology and climate systems   built for verification, impact, and scale beyond borders.";
 
-const IMPACT_INTRO = "Global recognition, research, and proof of responsibility — without the noise.";
+const IMPACT_INTRO = "Global recognition, research, and proof of responsibility   without the noise.";
 
 const IMPACT_PROOF = [
-  { text: "Oxford, Yale, Google, TKS — programs and scholarships", icon: <Landmark className="w-5 h-5" /> },
+  { text: "Oxford, Yale, Google, TKS   programs and scholarships", icon: <Landmark className="w-5 h-5" /> },
   { text: "UNICEF partnerships, global ambassador roles, international conferences", icon: <Globe className="w-5 h-5" /> },
   { text: "Peace and changemaker nominations, youth leadership recognition", icon: <Star className="w-5 h-5" /> },
 ];
@@ -100,10 +100,10 @@ const HomeImpactPreview = () => {
                   key={idx}
                   className="flex gap-3 sm:gap-4 md:gap-5 items-start sm:items-center p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all group"
                 >
-                  <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-black border border-white/10 text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                  <div className="p-1  md:p-3 rounded-lg sm:rounded-xl bg-black border border-white/10 text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
                     {React.cloneElement(item.icon, { className: "w-4 h-4 sm:w-5 sm:h-5" })}
                   </div>
-                  <span className="text-gray-300 text-sm sm:text-base md:text-lg font-light leading-snug">
+                  <span className="text-gray-300 text-xs sm:text-base md:text-lg font-light leading-snug">
                     {item.text}
                   </span>
                 </div>

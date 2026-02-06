@@ -34,7 +34,7 @@ const App = () => {
           <div className="space-y-6 w-full">
             <h1 className="text-4xl md:text-7xl font-bold tracking-tighter text-white">
               {HERO_LINES[0]} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-400 leading-relaxed tracking-normal text-2xl md:text-3xl">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-400 leading-relaxed tracking-normal text-[22px] md:text-3xl">
                 {HERO_LINES[1]}
               </span>
             </h1>
@@ -67,9 +67,9 @@ const App = () => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="p-10 rounded-3xl bg-slate-900/10 border border-slate-800/60 backdrop-blur-sm hover:border-cyan-500/40 transition-all group"
+              className=" p-6 md:p-10 rounded-3xl bg-slate-900/10 border border-slate-800/60 backdrop-blur-sm hover:border-cyan-500/40 transition-all group"
             >
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">{item.title}</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">{item.title}</h3>
               <p className="text-slate-400 text-base leading-relaxed">{item.desc}</p>
             </div>
           ))}

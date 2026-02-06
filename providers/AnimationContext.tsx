@@ -8,7 +8,7 @@ import {
 } from "react";
 
 /**
- * Global animation context — ready for GSAP / ScrollTrigger / Framer Motion.
+ * Global animation context   ready for GSAP / ScrollTrigger / Framer Motion.
  * Exposes refs and flags so scroll-driven sections, pinning, and page transitions
  * can be coordinated without blocking or conflicting with Three.js.
  *

@@ -4,10 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Mail, MessageCircle, Instagram, ArrowUpRight, Send, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
-const HERO_TAGLINE = "Collaboration & Contact — clear, professional, direct.";
+const HERO_TAGLINE = "Collaboration & Contact   clear, professional, direct.";
 
 const LOOKING_FOR = [
-  { title: "Partnerships", desc: "Strategic partnerships across climate-tech, platforms, and impact — execution-first, globally." },
+  { title: "Partnerships", desc: "Strategic partnerships across climate-tech, platforms, and impact   execution-first, globally." },
   { title: "Investors", desc: "Aligned capital for ventures that scale beyond borders with transparent governance and measurable impact." },
   { title: "Accelerators", desc: "Programs and cohorts focused on venture building, climate, and digital transformation." },
   { title: "Policy & Research", desc: "Academic, policy, and research institutions working on sustainability, technology adoption, and youth." },
@@ -197,7 +197,7 @@ export default function App() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-300"
+                      className="group flex items-center justify-between p-2 md:p-6 rounded-xl sm:rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-blue-500/30 transition-all duration-300"
                     >
                       <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
                         <div className={`p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl bg-black border border-white/10 ${item.color} transition-colors flex-shrink-0`}>
@@ -219,10 +219,10 @@ export default function App() {
                 {/* Gradient Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 rounded-[2rem] sm:rounded-[2.3rem] md:rounded-[2.6rem] blur-lg opacity-20"></div>
 
-                <div className="relative p-6 sm:p-8 md:p-10 lg:p-12 rounded-[1.9rem] sm:rounded-[2.2rem] md:rounded-[2.5rem] bg-zinc-900/60 border border-white/10 shadow-2xl backdrop-blur-xl">
+                <div className="relative p-4 py-8 md:p-10 lg:p-12 rounded-[1.9rem] sm:rounded-[2.2rem] md:rounded-[2.5rem] bg-zinc-900/60 border border-white/10 shadow-2xl backdrop-blur-xl">
                   <form
-                  onSubmit={handleSubmit}
-                  className="space-y-5 sm:space-y-6">
+                    onSubmit={handleSubmit}
+                    className="space-y-5 sm:space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                       <div className="space-y-2">
                         <label className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-widest text-cyan-400 ml-1 font-bold">Name</label>
@@ -278,8 +278,8 @@ export default function App() {
                       disabled={loading || submitted}
                       type="submit"
                       className={`w-full py-4 sm:py-5 rounded-lg sm:rounded-xl font-bold transition-all flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base ${submitted
-                          ? "bg-emerald-500 text-white cursor-default"
-                          : "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-blue-600 active:scale-[0.98] shadow-blue-500/30"
+                        ? "bg-emerald-500 text-white cursor-default"
+                        : "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-blue-600 active:scale-[0.98] shadow-blue-500/30"
                         }`}
                     >
                       {loading ? (
@@ -308,10 +308,13 @@ export default function App() {
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6">
             <Link
-            href="/connect"
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors text-sm sm:text-base w-full sm:w-auto">
+              href="/connect"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-colors"
+            >
               Get in Touch
             </Link>
+
             <Link href="/impact" className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-colors text-sm sm:text-base w-full sm:w-auto">
               View Impact
             </Link>

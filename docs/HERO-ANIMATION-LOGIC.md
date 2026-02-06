@@ -1,4 +1,4 @@
-# Hero Section — Animation Logic
+# Hero Section   Animation Logic
 
 ## Overview
 

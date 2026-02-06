@@ -24,7 +24,7 @@ import Link from 'next/link';
  * Aesthetic: Industrial Tech, High-contrast, Bento-architecture.
  */
 
-const HERO_TAGLINE = "Meetech Labs & Ecosystem — scale beyond one project.";
+const HERO_TAGLINE = "Meetech Labs & Ecosystem   scale beyond one project.";
 
 const OVERVIEW_ITEMS = [
   {
@@ -34,7 +34,7 @@ const OVERVIEW_ITEMS = [
   },
   {
     title: "Multi-sector focus",
-    desc: "Climate-tech, digital platforms, education, and global services — united by execution-first and transparent governance.",
+    desc: "Climate-tech, digital platforms, education, and global services   united by execution-first and transparent governance.",
     icon: <Workflow className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0" />
   },
 ];
@@ -47,7 +47,7 @@ const VENTURE_AREAS = [
   },
   {
     title: "Digital platforms",
-    desc: "Products and systems that connect stakeholders, not silos — designed for international adoption.",
+    desc: "Products and systems that connect stakeholders, not silos   designed for international adoption.",
     icon: <Cpu className="text-blue-500 flex-shrink-0" size={18} />
   },
   {
@@ -63,7 +63,7 @@ const VENTURE_AREAS = [
 ];
 
 const HOW_BUILT = [
-  { title: "Independent scalability", body: "Each venture is designed to grow on its own — with clear ownership, metrics, and path to sustainability." },
+  { title: "Independent scalability", body: "Each venture is designed to grow on its own   with clear ownership, metrics, and path to sustainability." },
   { title: "International readiness", body: "From day one, ventures are built for global deployment: compliance, localization, and distributed execution." },
   { title: "Transparent governance", body: "Reporting, verification, and accountability are built into how we operate and measure impact." },
 ];
@@ -71,7 +71,7 @@ const HOW_BUILT = [
 const OPERATING_MODEL = [
   {
     title: "Remote-first",
-    desc: "Teams and operations are distributed by design — no single HQ required to deliver at scale.",
+    desc: "Teams and operations are distributed by design   no single HQ required to deliver at scale.",
     icon: <Globe className="flex-shrink-0" size={18} />
   },
   {
@@ -81,7 +81,7 @@ const OPERATING_MODEL = [
   },
   {
     title: "System-based growth",
-    desc: "Processes, platforms, and governance scale with the portfolio — not ad hoc, but repeatable.",
+    desc: "Processes, platforms, and governance scale with the portfolio   not ad hoc, but repeatable.",
     icon: <Scale className="flex-shrink-0" size={18} />
   },
 ];

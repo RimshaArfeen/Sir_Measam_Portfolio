@@ -24,7 +24,7 @@ const AWARDS = [
 const PROGRAMS = [
   { title: "Yale", desc: "Leadership and global affairs programs.", color: "border-blue-600" },
   { title: "Google", desc: "Certifications and innovation programs.", color: "border-cyan-500" },
-  { title: "TKS", desc: "The Knowledge Society — innovation and future-building.", color: "border-blue-400" },
+  { title: "TKS", desc: "The Knowledge Society   innovation and future-building.", color: "border-blue-400" },
   { title: "LaunchX", desc: "Entrepreneurship and venture-building.", color: "border-cyan-600" },
   { title: "LeanGap", desc: "Lean methodology and execution frameworks.", color: "border-blue-500" },
 ];
@@ -37,7 +37,7 @@ const LEADERSHIP = [
   },
   {
     title: "Global ambassador roles",
-    body: "Representing organizations and causes on global stages — policy, sustainability, and youth.",
+    body: "Representing organizations and causes on global stages   policy, sustainability, and youth.",
     stat: "Diplomatic Representation"
   },
   {
@@ -105,7 +105,7 @@ export default function App() {
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-blue-600/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-cyan-600/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
-        <AnimatedBeamsBackground/>
+        <AnimatedBeamsBackground />
       </div>
 
       {/* Hero Section */}
@@ -228,7 +228,7 @@ export default function App() {
               Impact = proof of responsibility
             </h2>
             <p className="relative z-10 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-400 font-light mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed">
-              Real-world influence beyond business — awards, programs, and service that demonstrate commitment to global impact.
+              Real-world influence beyond business   awards, programs, and service that demonstrate commitment to global impact.
             </p>
 
             <div className="relative z-10 flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 justify-center">
@@ -247,7 +247,7 @@ export default function App() {
         </div>
       </section>
 
-    
+
     </div>
   );
 }

@@ -13,7 +13,7 @@
 // const INTRO_PARAS = [
 //   "I am a young founder, researcher, and global impact builder leading multi-sector ventures across climate-tech, ESG infrastructure, technology platforms, and digital services.",
 //   "I operate remote-first, globally distributed teams, build scalable products, publish research, and launch solutions designed for international adoption and measurable impact.",
-//   "My work sits at the intersection of technology, sustainability, and execution — focused on transparency, verification, and systems that scale beyond borders.",
+//   "My work sits at the intersection of technology, sustainability, and execution   focused on transparency, verification, and systems that scale beyond borders.",
 // ];
 
 // const TRAITS = ["Operating globally", "Remote-first", "Founder-led"];
@@ -377,7 +377,7 @@ const INTRO = "I build systems that solve real-world problems at scale.";
 const INTRO_PARAS = [
   "I am a young founder, researcher, and global impact builder leading multi-sector ventures across climate-tech, ESG infrastructure, technology platforms, and digital services.",
   "I operate remote-first, globally distributed teams, build scalable products, publish research, and launch solutions designed for international adoption and measurable impact.",
-  "My work sits at the intersection of technology, sustainability, and execution — focused on transparency, verification, and systems that scale beyond borders.",
+  "My work sits at the intersection of technology, sustainability, and execution   focused on transparency, verification, and systems that scale beyond borders.",
 ];
 
 const TRAITS = [
@@ -464,7 +464,7 @@ const FadeIn = ({
 export default function App() {
   return (
     <div className="bg-black/40 text-white min-h-screen selection:bg-cyan-500/30 overflow-x-hidden">
-     <AnimatedBeamsBackground />
+      <AnimatedBeamsBackground />
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -545,7 +545,7 @@ export default function App() {
 
         {/* STATS STRIP */}
         <section className="w-full border-y border-white/5 bg-white/[0.02] backdrop-blur-md flex justify-around">
-          <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
             {STATS.map((stat, i) => (
               <FadeIn key={i} delay={i * 100} direction="none">
                 <div className="text-center md:text-left group">

@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PHILOSOPHY = [
   "I build systems that solve real-world problems at scale.",
-  "Execution-first: teams, products, and go-to-market — shipped, not theorized.",
+  "Execution-first: teams, products, and go-to-market   shipped, not theorized.",
   "Operating globally, remote-first, founder-led.",
 ];
 
@@ -50,7 +50,7 @@ const useIntersectionObserver = <T extends HTMLElement>(
 
 
 
- const HomeAboutPreview = () => {
+const HomeAboutPreview = () => {
   const [sectionRef, isVisible] = useIntersectionObserver({ threshold: 0.2, once: true });
 
   return (
