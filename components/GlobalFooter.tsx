@@ -71,7 +71,7 @@ const GlobalFooter = () => {
                 <Image src={logo} alt="Meetech" className="h-full w-full" />
               </div>
               <span className="text-2xl font-bold tracking-tighter">
-                MESAM<span className="text-cyan-400">.</span>
+                MEASM<span className="text-cyan-400">.</span>
               </span>
             </a>
             <div className="flex flex-col gap-4">

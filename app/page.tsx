@@ -9,7 +9,7 @@ import Link from "next/link";
 
 // --- MAIN PORTFOLIO COMPONENT ---
 const HERO_LINES = [
-  "Muhammad Mesam Raza",
+  "Muhammad Measm Raza",
   "Founder | Climate-Tech Entrepreneur | Global Impact Builder",
   "Building verified climate impact, scalable technology, and globally distributed companies from day one.",
   "Operating globally · Remote-first · Founder-led",

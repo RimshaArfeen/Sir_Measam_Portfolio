@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Mesam", template: "%s | Mesam" },
+  title: { default: "Muhammad Mesam", template: "%s | Muhammad Mesam" },
   description: "A premium digital presence.",
   openGraph: {
     title: "Mesam",
