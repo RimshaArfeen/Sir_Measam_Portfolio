@@ -1,9 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb";
-import Contact from "@/models/Contact";
 import { Resend } from "resend";
-import mongoose from "mongoose";
-
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -17,12 +13,6 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
-await connectDB();
-if (!mongoose.connection.readyState) {
-  throw new Error("MongoDB not connected");
-}
-    await Contact.create({ name, email, subject, message });
 
     if (resend && process.env.CONTACT_EMAIL) {
       await resend.emails.send({
@@ -39,13 +29,11 @@ if (!mongoose.connection.readyState) {
     }
 
     return NextResponse.json({ success: true });
-  }  catch (error: any) {
-  console.error("CONTACT API ERROR:", error?.message || error);
-  return NextResponse.json(
-    { error: error?.message || "Server error" },
-    { status: 500 }
-  );
-
+  } catch (error: any) {
+    console.error("CONTACT API ERROR:", error?.message || error);
+    return NextResponse.json(
+      { error: error?.message || "Server error" },
+      { status: 500 }
+    );
   }
-
 }
